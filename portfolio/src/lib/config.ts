@@ -29,4 +29,5 @@ export const config = {
   operatorName: String(extra.operatorName || ''),
   hostingRegion: String(extra.hostingRegion || ''),
   backupRetentionDays: String(extra.backupRetentionDays || ''),
+  backupRetentionPolicy: String(extra.backupRetentionPolicy || ''),
 };

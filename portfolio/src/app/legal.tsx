@@ -109,8 +109,8 @@ export default function Legal() {
               may have separate network logs.
             </T>
             <T>
-              {config.hostingRegion && config.backupRetentionDays
-                ? `Our service database is hosted in ${config.hostingRegion}. Backups expire within ${config.backupRetentionDays} days under our retention schedule. `
+              {config.hostingRegion && (config.backupRetentionPolicy || config.backupRetentionDays)
+                ? `Our service database is hosted in ${config.hostingRegion}. ${config.backupRetentionPolicy || `Backups expire within ${config.backupRetentionDays} days under our retention schedule.`} `
                 : 'Hosting and backup retention details have not yet been finalized for this preview. '}
               Connected providers may process data in other countries. Legally retained billing
               records follow the purchase provider’s retention obligations. Contact us for details

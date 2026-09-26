@@ -74,6 +74,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       operatorName: process.env.OPERATOR_NAME || '',
       hostingRegion: process.env.HOSTING_REGION || '',
       backupRetentionDays: process.env.BACKUP_RETENTION_DAYS || '',
+      backupRetentionPolicy: process.env.BACKUP_RETENTION_POLICY || '',
       ...(projectId ? { eas: { projectId } } : {}),
     },
   };

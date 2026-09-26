@@ -2,6 +2,8 @@
 
 A private place to practice difficult workplace conversations, find a clearer sentence, and try again.
 
+Owned by Alessandra Ascarza. Development includes contracted technical assistance; ownership remains with Alessandra. Support: alemccray@protonmail.com.
+
 The active release is **Rehearsal Room: Career Prep** for iPhone. This repository also contains three other app variants that share its foundation. All application source, setup instructions, tests, and release documentation are in [`portfolio/`](portfolio/README.md).
 
 ## Development

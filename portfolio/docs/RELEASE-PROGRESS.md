@@ -1,5 +1,22 @@
 # Release progress — September 26, 2026
 
+## Continuation checkpoint — 17:05 UTC
+
+This checkpoint supersedes the initial check below where statuses differ.
+
+- Owner confirmed by the operator: Alessandra Ascarza, adult medical student in Lima, Peru. The operator provides contracted technical assistance. Public support: `alemccray@protonmail.com`. Academic contact remains in the private Devpost judging field. Full category eligibility and student-only team representation still need review.
+- Signed iPhone **1.0.0 (1)** build succeeded: [EAS build 33953272](https://expo.dev/accounts/samdev03/projects/shipaton-rehearsal/builds/33953272-970e-4c80-8be2-5d459152bb49). Built from the working tree based on `54aae10`, including the dependency and privacy-disclosure edits in this checkpoint. Signing covers the app and OneSignal notification extension on Apple team `WZ894A9DD2`.
+- TestFlight upload is pending: the first noninteractive EAS Submit attempt stopped because no App Store Connect upload API key is configured. An App Manager key form named `Rehearsal Expo Submit` is prepared; creation and storage in Expo await explicit approval. No store release or device testing is claimed.
+- RevenueCat project `34974d75`: App Store app `app2cb9b08c53`, valid Apple IAP credentials, public SDK key configured in EAS production and preview. The approved V1 server key is saved only in Render. The actual app entitlement `rehearsal_pro` (`entl2691007bd6`) is created and attached to both Apple products. The older test-store entitlement remains unchanged. Offering package mapping and the authenticated webhook remain pending.
+- Apple subscription group `22415938` has English (U.S.) display name `Rehearsal Room Pro`; monthly product `rehearsal_pro_monthly` (`6816464881`) at USD 8.99 / PEN 39.90, annual `rehearsal_pro_annual` (`6816466389`) at USD 49.99 / PEN 229.90. Availability is configured for the US and Peru. Both remain Prepare for Submission; group levels, review screenshots, and any judge free-access offer need completion.
+- Render `/healthz` is configured. Deployment `dep-darvdhrbc2fs738n6h30` is live with the server purchase key, owner/support details, Apple app mapping, Virginia hosting disclosure, and the accurate provider-managed snapshot policy. Render retains daily snapshots for at least seven days; no fixed maximum expiry is asserted. A production restore drill remains outstanding.
+- The user approved use of an existing funded OpenAI project. An empty `OPENAI_API_KEY` row is staged in the Render editor for direct user entry; it has not yet been verified saved. AI/transcription must not be claimed operational until tested.
+- Devpost draft `1198280-rehearsal-room`: Alessandra joined as an editor using her own account, private additional-info fields saved, 3/5 steps complete. Original creator remains the contractor; resolve student-entry representation before final submission. Native demo, native screenshot, public repository, and final submit remain pending.
+- Current source checks: typecheck and lint passed; 18 API/domain/provider tests passed; web, iOS, and Android exports passed. Four browser workflows passed after clearing a stale local API address from Metro's cache (`EXPO_NO_DOTENV=1`, explicit test API URL). These test flows use isolated fictional accounts and do not establish purchase, notification, AI, or native-device success.
+- Repository remains private. Both existing commits were scanned for common private-key and token patterns with no matches; tracked `.env`/private key files were absent. The scan is limited, not a confidentiality guarantee. The public-source scope includes all four app variants, docs and MIT license.
+
+## Initial checkpoint (historical)
+
 ## Verified
 
 - Render serves the Rehearsal Room web companion at `https://rehearsal-room-api-tooj.onrender.com`.

@@ -1,10 +1,10 @@
 {
-  "checked_at": "2026-09-24",
+  "checked_at": "2026-09-26",
   "deadline": "2026-10-01T06:45:00Z",
   "entrant": {
     "eligibility_reviewed": false,
-    "adult": null,
-    "active_student": null,
+    "adult": true,
+    "active_student": true,
     "academic_email_verified": false,
     "guardian_consent_if_required": false
   },

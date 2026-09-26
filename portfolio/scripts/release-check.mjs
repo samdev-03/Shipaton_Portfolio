@@ -31,10 +31,11 @@ need(env.OPERATOR_NAME?.trim(), 'Set the operator identity.');
 need(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(env.SUPPORT_EMAIL || ''), 'Set a monitored support email.');
 need(env.HOSTING_REGION?.trim(), 'Declare the actual hosting region.');
 need(
-  /^\d+$/.test(env.BACKUP_RETENTION_DAYS || '') &&
-    Number(env.BACKUP_RETENTION_DAYS) > 0 &&
-    Number(env.BACKUP_RETENTION_DAYS) <= 365,
-  'Declare and implement a backup retention period from 1 to 365 days.',
+  Boolean(env.BACKUP_RETENTION_POLICY?.trim()) ||
+    (/^\d+$/.test(env.BACKUP_RETENTION_DAYS || '') &&
+      Number(env.BACKUP_RETENTION_DAYS) > 0 &&
+      Number(env.BACKUP_RETENTION_DAYS) <= 365),
+  'Document the verified provider backup policy, or implement a maximum retention period from 1 to 365 days.',
 );
 need(env[p + '_EAS_PROJECT_ID'], 'Link this app to its separate EAS project.');
 need(

@@ -2,7 +2,7 @@
 
 ## Identity and deployment
 
-Choose an owned reverse-domain bundle root. Create independent EAS and store projects for each app you will release. Supply per-variant public keys via EAS environment configuration and set `EXPO_PUBLIC_API_URL` to the HTTPS API. Set `OPERATOR_NAME`, monitored `SUPPORT_EMAIL`, `LEGAL_ORIGIN`, actual `HOSTING_REGION` and configured `BACKUP_RETENTION_DAYS`. These values are included at build time; rebuild after changes. A retention declaration does not configure backup cleanup: implement it on your host. Complete the remaining policy details in `docs/store/PRIVACY-AND-REVIEW.md` before launch.
+Choose an owned reverse-domain bundle root. Create independent EAS and store projects for each app you will release. Supply per-variant public keys via EAS environment configuration and set `EXPO_PUBLIC_API_URL` to the HTTPS API. Set `OPERATOR_NAME`, monitored `SUPPORT_EMAIL`, `LEGAL_ORIGIN`, actual `HOSTING_REGION` and verified `BACKUP_RETENTION_POLICY` (or `BACKUP_RETENTION_DAYS` only when a maximum expiry is implemented). These values are included at build time; rebuild after changes. A retention declaration does not configure backup cleanup. Complete the remaining policy details in `docs/store/PRIVACY-AND-REVIEW.md` before launch.
 
 Server secrets stay in the hosting environment, never `EXPO_PUBLIC_*`, `app.config.ts` extras or public source. Generate DATA_KEY, WEBHOOK_SECRET and OPS_TOKEN independently. Protect DATA_KEY separately from database backups. Production startup rejects absent encryption keys, weak operator/webhook secrets and a non-HTTPS public origin.
 
