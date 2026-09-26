@@ -131,3 +131,25 @@ test('provider diagnostics exclude secrets and content, and preserve audio forma
     );
   }
 });
+
+test('billing diagnostics distinguish credit and spend limits while suppressing unknown details', async (t) => {
+  const logged = [];
+  t.mock.method(console, 'error', (line) => logged.push(JSON.parse(line)));
+  for (const [code, type, expected] of [
+    ['credit_balance_exhausted', 'insufficient_quota', 'credit_balance_exhausted'],
+    ['organization_usage_limit_exceeded', 'insufficient_quota', 'organization_usage_limit_exceeded'],
+    ['organization_spend_limit_exceeded', 'insufficient_quota', 'organization_spend_limit_exceeded'],
+    ['project_spend_limit_exceeded', 'insufficient_quota', 'project_spend_limit_exceeded'],
+    ['private-org-id', 'insufficient_quota', 'insufficient_quota'],
+    ['private-org-id', 'private-content', 'unclassified'],
+  ]) {
+    const p = providers({ OPENAI_API_KEY: 'private-api-key' }, async () => ({
+      ok: false,
+      status: 429,
+      json: async () => ({ error: { code, type, message: 'private-api-key private-content' } }),
+    }));
+    await assert.rejects(p.roleplay({ ai: 1 }, { counterpart: 'Manager' }, []));
+    assert.equal(logged.at(-1).code, expected);
+  }
+  assert.doesNotMatch(JSON.stringify(logged), /private-/);
+});

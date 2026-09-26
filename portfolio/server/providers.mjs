@@ -30,6 +30,10 @@ export function providers(env, request = fetch) {
       const knownCodes = new Set([
         'invalid_api_key',
         'insufficient_quota',
+        'credit_balance_exhausted',
+        'organization_usage_limit_exceeded',
+        'organization_spend_limit_exceeded',
+        'project_spend_limit_exceeded',
         'model_not_found',
         'rate_limit_exceeded',
         'invalid_json_schema',
@@ -38,7 +42,7 @@ export function providers(env, request = fetch) {
         'permission_denied',
       ]);
       const detail = typeof r.json === 'function' ? await r.json().catch(() => null) : null;
-      const code = detail?.error?.code || detail?.error?.type;
+      const code = [detail?.error?.code, detail?.error?.type].find((value) => knownCodes.has(value));
       const endpoint = new URL(url);
       console.error(
         JSON.stringify({
