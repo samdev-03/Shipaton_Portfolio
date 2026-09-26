@@ -2,7 +2,7 @@ import React from 'react';
 import { Linking } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Screen, Stack, T, Card, Button, Notice } from '../components/ui';
-import { brand, config } from '../lib/config';
+import { appId, brand, config } from '../lib/config';
 export default function Legal() {
   const { document } = useLocalSearchParams<{ document: string }>(),
     terms = document === 'terms',
@@ -13,7 +13,7 @@ export default function Legal() {
         <T kind="hero">
           {terms ? 'Clear expectations.' : support ? 'A little help.' : 'Your privacy matters.'}
         </T>
-        <T kind="caption">Effective September 24, 2026 · {brand.name}</T>
+        <T kind="caption">Effective September 26, 2026 · {brand.name}</T>
         {config.operatorName ? (
           <T>Operated by {config.operatorName}.</T>
         ) : (
@@ -22,10 +22,13 @@ export default function Legal() {
         {terms ? (
           <>
             <T>
-              {brand.name} offers everyday practice and organization tools for adults. Use it
-              respectfully, with information you have permission to enter or share. You retain
-              ownership of your content and grant permission to process it to provide the features
-              you request.
+              {brand.name} offers everyday practice and organization tools{' '}
+              {appId === 'rehearsal'
+                ? 'for people aged 16 and older. Users under 18 must have a parent or guardian review these terms and the privacy policy and give permission before using the app. AI practice and voice transcription are available only to adults aged 18 and older.'
+                : 'for adults.'}{' '}
+              Use it respectfully, with information you have permission to enter or share. You
+              retain ownership of your content and grant permission to process it to provide the
+              features you request.
             </T>
             <T>
               Practice cues are informal suggestions, not an assessment of your ability or a
@@ -77,10 +80,11 @@ export default function Legal() {
         ) : (
           <>
             <T>
-              We store your name and email, hashed password and recovery code, and the content you
-              save. Content fields are encrypted in the service database; the server decrypts them
-              to provide your features. This is not end-to-end encryption. Sessions use secure
-              device storage on native apps and HttpOnly cookies on the web.
+              We store your name and email, declared age range and permission confirmation, hashed
+              password and recovery code, and the content you save. Content fields are encrypted in
+              the service database; the server decrypts them to provide your features. This is not
+              end-to-end encryption. Sessions use secure device storage on native apps and HttpOnly
+              cookies on the web.
             </T>
             <T>
               Care-circle members can read shared tasks and display names. Anyone holding a quote
@@ -125,7 +129,9 @@ export default function Legal() {
               already seen or copied.
             </T>
             <T>
-              This service is intended for adults. Do not enter children’s personal data, medical
+              {appId === 'rehearsal'
+                ? 'Rehearsal Room is for ages 16 and up, with parent or guardian permission required under 18. We store your declared age range and permission confirmation, not your date of birth. AI processing is unavailable to users under 18. Do not enter personal data about children under 16, medical'
+                : 'This service is intended for adults. Do not enter children’s personal data, medical'}{' '}
               records, payment-card details, or confidential employment material. Contact support if
               such information was submitted in error.
             </T>

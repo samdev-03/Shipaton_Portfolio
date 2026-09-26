@@ -66,7 +66,7 @@ async function fixture(t, overrides = {}) {
       r = await call(
         '/v1/auth/register',
         'POST',
-        { name: 'Jamie', email, password, accepted: true },
+        { name: 'Jamie', email, password, accepted: true, ageBand: '18_plus' },
         { app: variant },
       );
     assert.equal(r.status, 201);
@@ -84,6 +84,93 @@ async function fixture(t, overrides = {}) {
     pushCalls: () => pushCalls,
   };
 }
+test('teen signup requires permission and cannot access AI even with Pro or stale AI state', async (t) => {
+  const f = await fixture(t);
+  const details = {
+    name: 'Jamie',
+    email: randomUUID() + '@example.test',
+    password,
+    accepted: true,
+  };
+  assert.equal((await f.call('/v1/auth/register', 'POST', details)).status, 400);
+  assert.equal(
+    (
+      await f.call('/v1/auth/register', 'POST', {
+        ...details,
+        ageBand: 'under_16',
+        guardianConsent: true,
+      })
+    ).status,
+    400,
+  );
+  assert.equal(
+    (await f.call('/v1/auth/register', 'POST', { ...details, ageBand: '16_17' })).status,
+    400,
+  );
+  const registered = await f.call('/v1/auth/register', 'POST', {
+    ...details,
+    ageBand: '16_17',
+    guardianConsent: true,
+  });
+  assert.equal(registered.status, 201);
+  const u = { ...registered.body, app: 'rehearsal' };
+  assert.equal(u.user.aiEligible, false);
+  f.paid.add(u.user.id);
+  assert.equal(
+    (
+      await f.call(
+        '/v1/preferences',
+        'PUT',
+        { analytics: false, notifications: false, ai: true },
+        u,
+      )
+    ).status,
+    403,
+  );
+  assert.equal(
+    (
+      await f.call(
+        '/v1/rehearsals',
+        'POST',
+        { scenarioId: 'workload', mode: 'ai', confidence: 3 },
+        u,
+      )
+    ).status,
+    403,
+  );
+  assert.equal((await f.call('/v1/audio/transcribe', 'POST', {}, u)).status, 403);
+  const guided = await f.call(
+    '/v1/rehearsals',
+    'POST',
+    { scenarioId: 'workload', mode: 'guided', confidence: 3 },
+    u,
+  );
+  assert.equal(guided.status, 201);
+  const practiced = await f.call(
+    '/v1/rehearsals/' + guided.body.id + '/turn',
+    'POST',
+    { text: 'Could we agree which task comes first?', version: 1 },
+    u,
+  );
+  assert.equal(practiced.status, 200);
+  f.store.run('UPDATE users SET ai=1 WHERE id=?', u.user.id);
+  f.store.run(
+    'UPDATE records SET payload=? WHERE id=?',
+    f.store.seal({ ...practiced.body, mode: 'ai' }),
+    guided.body.id,
+  );
+  assert.equal(
+    (
+      await f.call(
+        '/v1/rehearsals/' + guided.body.id + '/turn',
+        'POST',
+        { text: 'Thank you.', version: practiced.body.version },
+        u,
+      )
+    ).status,
+    403,
+  );
+});
 test('auth isolates apps, encrypts content, and recovery invalidates prior sessions', async (t) => {
   const f = await fixture(t),
     u = await f.register(),

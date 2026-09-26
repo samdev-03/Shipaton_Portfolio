@@ -78,12 +78,13 @@ function Content() {
                   <T>Optional AI processing</T>
                   <T kind="caption">
                     Send selected practice text and recordings to OpenAI for AI roleplay or
-                    transcription. Guided practice works without it.
+                    transcription. Available to adults 18 and older. Guided practice works without
+                    it.
                   </T>
                 </Stack>
                 <Switch
                   accessibilityLabel="Optional AI processing"
-                  disabled={a.busy}
+                  disabled={a.busy || !user.aiEligible}
                   value={user.preferences.ai}
                   onValueChange={() => toggle('ai')}
                 />

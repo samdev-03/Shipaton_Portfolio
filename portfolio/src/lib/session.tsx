@@ -14,6 +14,8 @@ export type User = {
   email: string;
   app: string;
   variant: 'A' | 'B';
+  aiEligible: boolean;
+  ageBand?: '16_17' | '18_plus';
   preferences: { analytics: boolean; notifications: boolean; ai: boolean };
 };
 type State = {

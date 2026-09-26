@@ -51,7 +51,7 @@ function Content() {
             Guided practice
           </Pill>
           <Pill active={mode === 'ai'} onPress={() => setMode('ai')}>
-            AI counterpart · Pro
+            AI counterpart · Pro · 18+
           </Pill>
         </Row>
         <T kind="caption">
@@ -69,7 +69,9 @@ function Content() {
         <Button
           title="Step into the room →"
           busy={action.busy}
-          disabled={mode === 'ai' && (!user?.preferences.ai || !config.aiAvailable)}
+          disabled={
+            mode === 'ai' && (!user?.aiEligible || !user?.preferences.ai || !config.aiAvailable)
+          }
           onPress={() =>
             action.run(async () => {
               if ((s.premium || mode === 'ai') && !entitlement?.active) {
@@ -84,6 +86,9 @@ function Content() {
         />
         {mode === 'ai' && !config.aiAvailable ? (
           <Notice message="AI is unavailable right now. Guided practice is ready to use." />
+        ) : null}
+        {mode === 'ai' && !user?.aiEligible ? (
+          <Notice message="AI practice and transcription are available to adults 18 and older. Choose guided practice to continue." />
         ) : null}
       </Stack>
     </Screen>

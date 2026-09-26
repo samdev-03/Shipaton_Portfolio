@@ -94,8 +94,8 @@ export const plans: Record<AppId, { free: string[]; pro: string[] }> = {
     free: ['Two guided scenarios', 'Retry any moment', 'Saved practice and reminders'],
     pro: [
       'All six scenarios',
-      'Optional AI counterpart and feedback',
-      'Optional voice transcription',
+      'Optional AI counterpart and feedback (ages 18+)',
+      'Optional voice transcription (ages 18+)',
     ],
   },
   care: {

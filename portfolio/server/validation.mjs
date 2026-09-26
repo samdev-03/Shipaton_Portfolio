@@ -27,6 +27,8 @@ export const schemas = {
         .transform((x) => x.toLowerCase()),
       password: z.string().min(12).max(128),
       accepted: z.literal(true),
+      ageBand: z.enum(['16_17', '18_plus']).optional(),
+      guardianConsent: z.boolean().default(false),
     })
     .strict(),
   login: z

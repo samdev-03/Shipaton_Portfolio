@@ -14,7 +14,7 @@ import {
   useAction,
   palette,
 } from '../components/ui';
-import { brand } from '../lib/config';
+import { appId, brand } from '../lib/config';
 import { useSession } from '../lib/session';
 export default function Auth() {
   const [kind, setKind] = useState('register'),
@@ -23,6 +23,8 @@ export default function Auth() {
     [password, setPassword] = useState(''),
     [code, setCode] = useState(''),
     [accepted, setAccepted] = useState(false),
+    [ageBand, setAgeBand] = useState<'16_17' | '18_plus' | ''>(''),
+    [guardianConsent, setGuardianConsent] = useState(false),
     action = useAction(),
     session = useSession();
   return (
@@ -75,16 +77,55 @@ export default function Auth() {
               </T>
             ) : null}
             {kind === 'register' ? (
-              <Row>
-                <Switch
-                  accessibilityLabel="Accept terms and privacy"
-                  value={accepted}
-                  onValueChange={setAccepted}
-                />
-                <T style={{ flex: 1 }}>
-                  I’m 18 or older and agree to the terms and privacy policy.
-                </T>
-              </Row>
+              <Stack>
+                {appId === 'rehearsal' ? (
+                  <Stack>
+                    <T kind="label">Your age range</T>
+                    <T kind="caption">
+                      Rehearsal Room is for ages 16 and up. We do not ask for your date of birth.
+                    </T>
+                    <Row>
+                      <Pill active={ageBand === '16_17'} onPress={() => setAgeBand('16_17')}>
+                        16–17
+                      </Pill>
+                      <Pill active={ageBand === '18_plus'} onPress={() => setAgeBand('18_plus')}>
+                        18 or older
+                      </Pill>
+                    </Row>
+                    {ageBand === '16_17' ? (
+                      <>
+                        <T kind="caption">
+                          Guided practice is available to you. AI practice and voice transcription
+                          are for adults 18 and older.
+                        </T>
+                        <Row>
+                          <Switch
+                            accessibilityLabel="Parent or guardian permission"
+                            value={guardianConsent}
+                            onValueChange={setGuardianConsent}
+                          />
+                          <T style={{ flex: 1 }}>
+                            My parent or guardian has reviewed the terms and privacy policy with me
+                            and gives permission for me to use this app.
+                          </T>
+                        </Row>
+                      </>
+                    ) : null}
+                  </Stack>
+                ) : null}
+                <Row>
+                  <Switch
+                    accessibilityLabel="Accept terms and privacy"
+                    value={accepted}
+                    onValueChange={setAccepted}
+                  />
+                  <T style={{ flex: 1 }}>
+                    {appId === 'rehearsal'
+                      ? 'I confirm my age range and agree to the terms and privacy policy.'
+                      : 'I’m 18 or older and agree to the terms and privacy policy.'}
+                  </T>
+                </Row>
+              </Stack>
             ) : null}
             {action.error ? <Notice error message={action.error} /> : null}
             {session.connectionError ? <Notice error message={session.connectionError} /> : null}
@@ -97,13 +138,28 @@ export default function Auth() {
                     : 'Sign in'
               }
               busy={action.busy}
-              disabled={!email || !password || (kind === 'register' && (!name || !accepted))}
+              disabled={
+                !email ||
+                !password ||
+                (kind === 'register' &&
+                  (!name ||
+                    !accepted ||
+                    (appId === 'rehearsal' &&
+                      (!ageBand || (ageBand === '16_17' && !guardianConsent)))))
+              }
               onPress={() =>
                 action.run(() =>
                   session.signIn(
                     kind,
                     kind === 'register'
-                      ? { name, email, password, accepted }
+                      ? {
+                          name,
+                          email,
+                          password,
+                          accepted,
+                          ageBand: appId === 'rehearsal' ? ageBand : '18_plus',
+                          guardianConsent,
+                        }
                       : kind === 'recover'
                         ? { email, password, recoveryCode: code }
                         : { email, password },

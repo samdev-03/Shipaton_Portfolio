@@ -1,5 +1,20 @@
 # Release progress — September 26, 2026
 
+## Continuation checkpoint — 17:35 UTC
+
+This checkpoint supersedes older statuses below.
+
+- Public MIT source release approved and completed: https://github.com/samdev-03/Shipaton_Portfolio . Commit `ca851b2` passed GitHub CI and was deployed on Render.
+- iOS 1.0.0 build 1 uploaded successfully via EAS submission `10b45051-d147-4108-93c6-3638a46d5f2e`; Apple processed it and shows Ready to Submit. App Store build ID `beaf1fc6-530f-4b22-9b4b-b4fad4759127`. The approved App Manager credential was created and stored by EAS; no private key is in source.
+- New user instruction permits younger users. Rehearsal Room now permits ages 16+, with a parent/guardian permission confirmation for ages 16–17. Age-band declarations are encrypted with the profile; no birth date is collected. AI roleplay and transcription remain adult-only, enforced on preferences, practice creation, turns, and audio endpoints. Other variants remain adult-only. Build 1 is superseded for release; a new signed build is required.
+- Verification of the age-access update: 19 API/domain/provider tests, five browser workflows, typecheck, lint, and web/iOS/Android exports passed. Tests cover missing or invalid age declarations, missing permission, guided access for teens, and rejection of AI access despite paid/stale state.
+- RevenueCat default offering maps both Apple products. Authenticated webhook `whintgrf54a87e734` reached the live backend with HTTP 200. Apple production and sandbox notification URLs are configured to RevenueCat. This is connectivity evidence, not purchase evidence.
+- User saved the funded OpenAI project key directly into Render. Live config reports AI available. Actual AI responses and transcription remain to be tested with a verified Pro/review account.
+- Production smoke checks passed on September 26: HTTPS health, fictional account registration, real RevenueCat free-entitlement verification, guided rehearsal and reflection, deletion, and rejection of the deleted session. No personal rehearsal content or live payments were used.
+- Apple listing description, promotional text, support/marketing URLs, copyright, subtitle, and Education/Business categories are saved. Rating revised for age 16+. Final privacy, review credentials, native screenshots, subscription review assets and public release remain pending.
+- Internal TestFlight group `Rehearsal Release QA` created without automatic distribution. Tester selection awaits the user. Native device testing, demo video and screenshots remain pending.
+- Devpost project story and private judging notes now include public source and verified build/service progress. OneSignal and Layers are explicitly unconfigured; no results are claimed. Final student-team representation and academic-email eligibility remain unresolved. Do not press final submission until evidence is complete and the user handles the prize-entry step.
+
 ## Continuation checkpoint — 17:05 UTC
 
 This checkpoint supersedes the initial check below where statuses differ.

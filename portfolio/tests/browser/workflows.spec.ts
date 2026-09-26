@@ -5,6 +5,8 @@ async function signup(page: Page, app = 'rehearsal') {
   await page.getByLabel('Your name', { exact: true }).fill('Jamie');
   await page.getByLabel('Email', { exact: true }).fill(app + '-' + Date.now() + '@example.test');
   await page.getByLabel('Password', { exact: true }).fill('Test-only-password-2026');
+  if (app === 'rehearsal')
+    await page.getByRole('button', { name: '18 or older', exact: true }).click();
   await page.getByRole('switch', { name: 'Accept terms and privacy' }).click();
   await page.getByRole('button', { name: 'Create my account', exact: true }).click();
   await page.getByRole('button', { name: 'I saved it. Continue', exact: true }).click();
@@ -14,6 +16,22 @@ async function shot(page: Page, name: string) {
   await mkdir('artifacts/screenshots', { recursive: true });
   await page.screenshot({ path: `artifacts/screenshots/${name}-web-preview-1179x2556.png` });
 }
+test('teen signup explains access and blocks creation until guardian permission', async ({
+  page,
+}) => {
+  await page.goto('/?app=rehearsal');
+  await page.getByLabel('Your name', { exact: true }).fill('Jamie');
+  await page.getByLabel('Email', { exact: true }).fill('teen-' + Date.now() + '@example.test');
+  await page.getByLabel('Password', { exact: true }).fill('Test-only-password-2026');
+  await page.getByRole('button', { name: '16–17', exact: true }).click();
+  await page.getByRole('switch', { name: 'Accept terms and privacy' }).click();
+  await expect(page.getByRole('button', { name: 'Create my account', exact: true })).toBeDisabled();
+  await page.getByRole('switch', { name: 'Parent or guardian permission' }).click();
+  await page.getByRole('button', { name: 'Create my account', exact: true }).click();
+  await page.getByRole('button', { name: 'I saved it. Continue', exact: true }).click();
+  await page.getByRole('tab', { name: 'Settings', exact: true }).click();
+  await expect(page.getByRole('switch', { name: 'Optional AI processing' })).toBeDisabled();
+});
 test('rehearsal: signup, practice, retry, reflect and persist', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));

@@ -49,10 +49,19 @@ export function createApp({
     ]),
     cookie = prod ? '__Host-session' : 'session',
     locks = new Set();
+  const aiEligible = (u) => store.open(u.profile).ageBand === '18_plus';
+  const requireAiAge = (u) => {
+    if (!aiEligible(u))
+      fail(
+        403,
+        'AI practice and transcription are available to adults 18 and older. Guided practice is available from age 16.',
+      );
+  };
   const me = (u) => ({
     id: u.id,
     app: u.app,
     ...store.open(u.profile),
+    aiEligible: aiEligible(u),
     preferences: { analytics: !!u.analytics, notifications: !!u.notifications, ai: !!u.ai },
     variant: experimentVariant(u.id),
   });
@@ -378,6 +387,10 @@ export function createApp({
         let u = store.get('SELECT * FROM users WHERE app=? AND email_hash=?', app, emailHash),
           recoveryCode;
         if (kind === 'register') {
+          if (app === 'rehearsal' && !input.ageBand)
+            fail(400, 'Choose your age range in the latest app before creating an account.');
+          if (input.ageBand === '16_17' && (app !== 'rehearsal' || !input.guardianConsent))
+            fail(400, 'Users aged 16–17 need parent or guardian permission to use Rehearsal Room.');
           if (u) fail(409, 'An account already exists. Sign in or use your recovery code.');
           const id = randomUUID();
           recoveryCode = token();
@@ -388,7 +401,13 @@ export function createApp({
               id,
               app,
               emailHash,
-              store.seal({ name: input.name, email: input.email }),
+              store.seal({
+                name: input.name,
+                email: input.email,
+                ageBand: input.ageBand || '18_plus',
+                guardianConsent: input.guardianConsent,
+                ageConfirmedAt: now(),
+              }),
               ph,
               hash(recoveryCode),
               now(),
@@ -450,6 +469,7 @@ export function createApp({
       }
       if (path === '/v1/preferences' && method === 'PUT') {
         const b = parse(schemas.preferences, await body());
+        if (b.ai) requireAiAge(u);
         store.transaction(() => {
           store.run(
             'UPDATE users SET analytics=?,notifications=?,ai=? WHERE id=?',
@@ -636,6 +656,7 @@ export function createApp({
           const b = parse(schemas.start, await body()),
             s = scenarios.find((x) => x.id === b.scenarioId);
           if (!s) fail(400, 'Choose a scenario.');
+          if (b.mode === 'ai') requireAiAge(u);
           if (s.premium || b.mode === 'ai') await requirePro(u);
           if (b.mode === 'ai' && !u.ai) fail(403, 'Enable AI processing in Settings.');
           json(
@@ -674,7 +695,10 @@ export function createApp({
             locks.add(r.id);
             try {
               limit('turn:' + u.id, 50, day);
-              if (d.mode === 'ai') await requirePro(u);
+              if (d.mode === 'ai') {
+                requireAiAge(u);
+                await requirePro(u);
+              }
               let messages = d.messages;
               if (b.retryIndex !== undefined) {
                 if (messages[b.retryIndex]?.role !== 'user')
@@ -733,6 +757,7 @@ export function createApp({
         }
       }
       if (path === '/v1/audio/transcribe' && method === 'POST' && app === 'rehearsal') {
+        requireAiAge(u);
         if (!u.ai) fail(403, 'Enable AI processing first.');
         await requirePro(u);
         limit('audio:' + u.id, 15, day);

@@ -39,7 +39,7 @@ There is no score for your worth or promise of a workplace outcome. Feedback off
 
 Optional reminders are scheduled by you. Analytics and AI processing have separate controls. Export or delete your account data in Settings.
 
-Pro is an optional auto-renewing subscription. Available plans, billing periods and localized prices are shown before purchase. Manage or cancel through the purchase provider. Deleting an account does not cancel a subscription. Designed for adults.
+Pro is an optional auto-renewing subscription. Available plans, billing periods and localized prices are shown before purchase. Manage or cancel through the purchase provider. Deleting an account does not cancel a subscription. Rehearsal Room is for ages 16 and up, with parent or guardian permission required under 18. AI practice and voice transcription are available to adults 18 and older.
 
 **Version 1.0 release notes**
 

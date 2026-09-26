@@ -11,14 +11,10 @@
   "apps": {
     "rehearsal": {
       "targets": [
-        "Grand",
         "Career",
         "Design",
-        "OneSignal",
         "NextGen",
-        "HAMM",
-        "Layers",
-        "BuildInPublic"
+        "HAMM"
       ],
       "store_url": "",
       "first_public_release": "",
@@ -27,7 +23,7 @@
       "judge_access_valid_until": "",
       "demo_video_url": "",
       "demo_duration_seconds": null,
-      "public_repository_url": "",
+      "public_repository_url": "https://github.com/samdev-03/Shipaton_Portfolio",
       "native_screenshot_path": "",
       "native_purchase_verified": false,
       "native_restore_verified": false,
