@@ -11,6 +11,8 @@ ios/
 test-results/
 *.keystore
 *.p12
+*.p8
+*.pem
 *.mobileprovision
 
 private-evidence/

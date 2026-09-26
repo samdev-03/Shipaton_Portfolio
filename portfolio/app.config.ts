@@ -6,9 +6,18 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ) as AppId,
     b = brands[id],
     p = id.toUpperCase(),
-    value = (key: string) => process.env[p + '_' + key] || '';
+    value = (key: string) => process.env[p + '_' + key] || '',
+    bundleRoot =
+      process.env.BUNDLE_ROOT ||
+      (id === 'rehearsal' ? 'com.horizonsystemssolutions' : 'com.example.shipaton'),
+    projectId =
+      value('EAS_PROJECT_ID') ||
+      process.env.EAS_PROJECT_ID ||
+      (id === 'rehearsal' ? '28dff74a-4109-4e3b-b008-f6786819b1d4' : ''),
+    production = process.env.APP_ENV === 'production' || process.env.NODE_ENV === 'production';
   return {
     ...config,
+    ...(id === 'rehearsal' ? { owner: 'samdev03' } : {}),
     name: b.name,
     slug: 'shipaton-' + id,
     version: '1.0.0',
@@ -18,14 +27,14 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     icon: `./assets/brands/${id}/icon.png`,
     ios: {
       supportsTablet: false,
-      bundleIdentifier: (process.env.BUNDLE_ROOT || 'com.example.shipaton') + '.' + id,
+      bundleIdentifier: bundleRoot + '.' + id,
       infoPlist: { ITSAppUsesNonExemptEncryption: false },
       entitlements: {
-        'aps-environment': process.env.NODE_ENV === 'production' ? 'production' : 'development',
+        'aps-environment': production ? 'production' : 'development',
       },
     },
     android: {
-      package: (process.env.BUNDLE_ROOT || 'com.example.shipaton') + '.' + id,
+      package: bundleRoot + '.' + id,
       adaptiveIcon: {
         foregroundImage: `./assets/brands/${id}/adaptive.png`,
         backgroundColor: b.color,
@@ -36,7 +45,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     plugins: [
       [
         'onesignal-expo-plugin',
-        { mode: process.env.NODE_ENV === 'production' ? 'production' : 'development' },
+        { mode: production ? 'production' : 'development' },
       ],
       'expo-router',
       'expo-secure-store',
@@ -65,9 +74,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       operatorName: process.env.OPERATOR_NAME || '',
       hostingRegion: process.env.HOSTING_REGION || '',
       backupRetentionDays: process.env.BACKUP_RETENTION_DAYS || '',
-      ...(value('EAS_PROJECT_ID') || process.env.EAS_PROJECT_ID
-        ? { eas: { projectId: value('EAS_PROJECT_ID') || process.env.EAS_PROJECT_ID } }
-        : {}),
+      ...(projectId ? { eas: { projectId } } : {}),
     },
   };
 };
