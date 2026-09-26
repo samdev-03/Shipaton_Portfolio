@@ -91,3 +91,43 @@ test('provider failure does not silently unlock premium', async () => {
     expiresAt: null,
   });
 });
+test('provider diagnostics exclude secrets and content, and preserve audio format', async (t) => {
+  const logged = [];
+  t.mock.method(console, 'error', (line) => logged.push(JSON.parse(line)));
+  const p = providers({ OPENAI_API_KEY: 'secret-key' }, async () => ({
+    ok: false,
+    status: 429,
+    json: async () => ({
+      error: { code: 'insufficient_quota', message: 'secret-key private-content' },
+    }),
+  }));
+  await assert.rejects(
+    p.roleplay({ ai: 1 }, { counterpart: 'Manager' }, [{ role: 'user', text: 'private-content' }]),
+  );
+  assert.deepEqual(logged, [
+    {
+      event: 'provider_request_failed',
+      provider: 'api.openai.com',
+      operation: 'roleplay',
+      status: 429,
+      code: 'insufficient_quota',
+    },
+  ]);
+  for (const [mime, extension] of [
+    ['audio/wav', 'wav'],
+    ['audio/mpeg', 'mp3'],
+    ['audio/mp4', 'mp4'],
+    ['audio/webm', 'webm'],
+    ['audio/m4a', 'm4a'],
+  ]) {
+    const audioProvider = providers({ OPENAI_API_KEY: 'test' }, async (_url, opts) => {
+      assert.equal(opts.body.get('file').name, 'practice.' + extension);
+      assert.equal(opts.body.get('file').type, mime);
+      return ok({ text: 'A fictional practice response.' });
+    });
+    assert.equal(
+      await audioProvider.transcribe({ ai: 1 }, new Uint8Array([0]), mime),
+      'A fictional practice response.',
+    );
+  }
+});

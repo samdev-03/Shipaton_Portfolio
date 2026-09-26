@@ -24,7 +24,38 @@ const response = z.object({ reply: z.string().min(1).max(1200), feedback }).stri
 export function providers(env, request = fetch) {
   async function call(url, options = {}) {
     const r = await request(url, { ...options, signal: AbortSignal.timeout(20000) });
-    if (!r.ok) fail(503, 'A connected service is unavailable. Please try again.');
+    if (!r.ok) {
+      // Log only operational metadata, never provider messages, credentials,
+      // customer identifiers, or the submitted practice/audio content.
+      const knownCodes = new Set([
+        'invalid_api_key',
+        'insufficient_quota',
+        'model_not_found',
+        'rate_limit_exceeded',
+        'invalid_json_schema',
+        'invalid_request_error',
+        'unsupported_value',
+        'permission_denied',
+      ]);
+      const detail = typeof r.json === 'function' ? await r.json().catch(() => null) : null;
+      const code = detail?.error?.code || detail?.error?.type;
+      const endpoint = new URL(url);
+      console.error(
+        JSON.stringify({
+          event: 'provider_request_failed',
+          provider: endpoint.hostname,
+          operation:
+            endpoint.pathname === '/v1/responses'
+              ? 'roleplay'
+              : endpoint.pathname === '/v1/audio/transcriptions'
+                ? 'transcription'
+                : 'subscription_or_notification',
+          status: r.status,
+          code: knownCodes.has(code) ? code : 'unclassified',
+        }),
+      );
+      fail(503, 'A connected service is unavailable. Please try again.');
+    }
     return r.status === 204 ? {} : r.json();
   }
   return {
@@ -156,7 +187,10 @@ export function providers(env, request = fetch) {
       form.append(
         'file',
         new Blob([audio], { type: mime }),
-        'practice.' + (mime.includes('webm') ? 'webm' : 'm4a'),
+        'practice.' +
+          ({ 'audio/webm': 'webm', 'audio/wav': 'wav', 'audio/mpeg': 'mp3', 'audio/mp4': 'mp4' }[
+            mime
+          ] || 'm4a'),
       );
       const r = await call('https://api.openai.com/v1/audio/transcriptions', {
         method: 'POST',
