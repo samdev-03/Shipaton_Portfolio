@@ -1,0 +1,56 @@
+{
+  "cli": {
+    "version": ">=16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "internal": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "APP_VARIANT": "rehearsal"
+      },
+      "node": "24.19.0"
+    },
+    "production-rehearsal": {
+      "autoIncrement": true,
+      "env": {
+        "APP_VARIANT": "rehearsal",
+        "NODE_ENV": "production"
+      },
+      "node": "24.19.0"
+    },
+    "production-care": {
+      "autoIncrement": true,
+      "env": {
+        "APP_VARIANT": "care",
+        "NODE_ENV": "production"
+      },
+      "node": "24.19.0"
+    },
+    "production-meal": {
+      "autoIncrement": true,
+      "env": {
+        "APP_VARIANT": "meal",
+        "NODE_ENV": "production"
+      },
+      "node": "24.19.0"
+    },
+    "production-quote": {
+      "autoIncrement": true,
+      "env": {
+        "APP_VARIANT": "quote",
+        "NODE_ENV": "production"
+      },
+      "node": "24.19.0"
+    }
+  },
+  "submit": {
+    "production-rehearsal": {},
+    "production-care": {},
+    "production-meal": {},
+    "production-quote": {}
+  }
+}

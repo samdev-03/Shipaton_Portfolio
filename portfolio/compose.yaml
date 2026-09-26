@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        APP_VARIANT: ${APP_VARIANT:-rehearsal}
+        EXPO_PUBLIC_API_URL: ${EXPO_PUBLIC_API_URL}
+        OPERATOR_NAME: ${OPERATOR_NAME}
+        SUPPORT_EMAIL: ${SUPPORT_EMAIL}
+        LEGAL_ORIGIN: ${LEGAL_ORIGIN}
+        HOSTING_REGION: ${HOSTING_REGION}
+        BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS}
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      DB_PATH: /data/portfolio.sqlite
+    ports: ['127.0.0.1:8787:8787']
+    volumes: ['portfolio-data:/data']
+    restart: unless-stopped
+volumes:
+  portfolio-data:

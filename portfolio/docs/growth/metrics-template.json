@@ -1,0 +1,21 @@
+{
+  "status": "unmeasured_template",
+  "app": "",
+  "build": "",
+  "window_start": "",
+  "window_end": "",
+  "audience_and_channel": "",
+  "experiment": "first_step_copy_v1",
+  "variant_a": {"distinct_exposed": null, "distinct_completed": null},
+  "variant_b": {"distinct_exposed": null, "distinct_completed": null},
+  "production_installs": null,
+  "verified_paying_users": null,
+  "gross_revenue_usd": null,
+  "refunds_usd": null,
+  "acquisition_cost_usd": null,
+  "source_exports": [],
+  "internal_test_exclusions": "",
+  "qualitative_observations": [],
+  "limitations": "",
+  "decision_and_next_test": ""
+}

@@ -1,0 +1,16 @@
+node_modules/
+.expo/
+.env
+.env.*
+!.env.example
+data/
+artifacts/
+dist/
+android/
+ios/
+test-results/
+*.keystore
+*.p12
+*.mobileprovision
+
+private-evidence/

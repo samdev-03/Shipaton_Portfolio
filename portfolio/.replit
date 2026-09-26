@@ -1,0 +1,11 @@
+# Confirm the available Node 24 module and persistent deployment storage in your account.
+run = "npm run api"
+entrypoint = "server/index.mjs"
+modules = ["nodejs-24"]
+[deployment]
+run = ["sh", "-c", "npm run api"]
+build = ["sh", "-c", "npm ci && npm run build:web"]
+deploymentTarget = "vm"
+[[ports]]
+localPort = 8787
+externalPort = 80
