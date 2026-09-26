@@ -1,5 +1,23 @@
 # Release progress — September 26, 2026
 
+## Continuation checkpoint — 18:15 UTC
+
+This checkpoint supersedes older statuses below. Release is not yet submitted to Apple or Devpost.
+
+- Public MIT source is deployed from `3cea6da26cb72d9832a52b929e548ec4e9f227d2`. GitHub run `36260827813` passed; Render deployment `dep-das0esrncjis73e39arg` is live. Twenty API/domain/provider tests, typecheck and lint passed. The backend-only update adds content-free provider diagnostics and preserves the actual audio file extension during transcription.
+- iOS 1.0.0 **build 2** completed in EAS (`381cbfff-30ea-45df-86e9-2f7b57a9d97c`), uploaded successfully (`9a9c6d02-2bb8-4102-98ad-298605fc2a7d`), and was processed by Apple (`a4c7847a-4719-4fd6-bd54-952f6f465a0c`). It contains the tested 16+ guided / 18+ AI policy from `e85c172`.
+- Build 2 is assigned to `Rehearsal Release QA`, with the user-approved internal tester. Apple reports it installed on an iPhone SE (3rd generation), iOS 26.7. Installation is verified; successful native workflows, purchases, restore, audio and deletion are not yet verified. Concrete testing instructions were saved in TestFlight.
+- Apple privacy responses are published with explicit user approval: name, email, audio, other user content, user ID, purchases, product interaction, and other data (age/permission), linked to identity and not used for tracking. The app rating is 16+.
+- The dedicated fictional Apple review account has verified complimentary `rehearsal_pro` access until **2026-10-31 23:59 UTC**. Its private credentials and review notes are saved in Apple's private review fields. Credentials are not in this repository. Build 2 is selected and saved in the App Store version draft.
+- Apple's existing Free Apps and Paid Apps agreements and tax form are active. Free download pricing and US/Peru availability are configured. Subscriptions remain separate monthly/annual purchases. Store screenshots, subscription review screenshots, matching subscription service levels and tested judge trial/promo access remain outstanding.
+- Live AI verification failed: OpenAI returned HTTP 429. The connected OpenAI organization's Billing page shows a free-trial balance of USD 0.00. The user has been asked to fund it or use the already-funded project's key. No AI-response or transcription success is claimed. Synthetic practice records were removed and the review account's optional AI setting reset after the checks.
+- Production smoke checks passed again at **18:14 UTC**: health, fictional registration, verified free entitlement, guided practice/reflection, deletion and rejected deleted-session access. These checks do not establish native behavior or production revenue.
+- Reused Alessandra's existing sole-owner Shipaton draft `1195853-rehearsal-room` (public preview slug `tbd-27jfd0`) instead of creating another project. Name, pitch, story, verified implementation tags, public repository, private academic contact and RevenueCat ID were saved. Its story accurately records the current build and remaining work. The older contractor-created draft `1198280-rehearsal-room` remains unsubmitted. Neither draft has been entered for judging.
+- Next Gen is the current viable submission path while the store release is prepared. Domain `upsjb.edu.pe` appears in JetBrains/swot. The account email field was unreadable through browser controls, so account-level academic-email verification is still pending. User confirmation of the entrant's ideas and creative direction is also pending. Do not assert completed eligibility.
+- Devpost native screenshot (1179 × 2556 without a device frame) and a public YouTube/Vimeo native demo under two minutes remain missing. Browser file-picker activation did not work, so even the existing 1024px icon still needs upload to the sole-owner draft. No web preview is represented as native evidence.
+- The existing Expo account does not currently have EAS Simulator enabled (availability check returned false). A suitable larger iPhone, Mac simulator, or a separately authorized cloud simulator can supply the required screenshot sizes. The iPhone SE can supply actual-device video and workflow verification.
+- Final Devpost submission accepts the rules and enters a prize competition; the user must perform that final step after the evidence and eligibility are complete.
+
 ## Continuation checkpoint — 17:35 UTC
 
 This checkpoint supersedes older statuses below.

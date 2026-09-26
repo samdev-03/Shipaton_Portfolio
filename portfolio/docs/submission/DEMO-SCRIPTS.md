@@ -11,10 +11,10 @@ Record each app separately on the platform being submitted. Target 95–110 seco
 | 25–43 | Enter “I cannot take on another project.”; show response and feedback | “Try a response in your own words. You get one small adjustment. These are informal wording cues, not a score of your personality or career.” |
 | 43–62 | Retry that turn with “I understand the deadline. Could we move the deck to Friday?” | “The useful moment is the retry. Change one response and explore a different branch without starting over.” |
 | 62–78 | Finish and reflect; show saved practice | “Record how ready you feel now. Your practice stays private, and you can revisit or delete it.” |
-| 78–93 | Show configured native paywall and restore; briefly show consent settings | “Pro adds more scenarios and optional AI roleplay and transcription. RevenueCat verifies access; optional processing stays under your control.” |
-| 93–105 | Show an actually delivered OneSignal reminder, if verified, then home | “A reminder arrives when you asked for it, with private details kept off your lock screen. A little practice, before the real conversation.” |
+| 78–93 | Show the actual native paywall and restore control; show consent settings | “Pro adds all six scenarios. RevenueCat powers the monthly and annual options. Optional AI and voice are available only to adults, with their permission.” |
+| 93–105 | Show privacy controls, then home | “Guided practice is available from age 16, with guardian permission under 18. You control processing, export and deletion in Settings. A little practice before the real conversation.” |
 
-If native push or live products are not verified, omit the corresponding claims and fix the integration before using this as a sponsor demonstration. Capture a separate silent proof clip of sandbox purchase/restore for review; it is not live revenue evidence.
+Only demonstrate AI after live checks pass; API funding is currently outstanding. OneSignal and Layers are not configured in this native release, so omit notification and experiment claims. Capture a separate silent proof clip of sandbox purchase/restore for review; it is not live revenue evidence.
 
 ## Care Relay · target 100 seconds
 
