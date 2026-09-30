@@ -58,7 +58,11 @@
       "apple_review_status": "Submitted September 30 at 12:49 p.m. EDT. Four items Waiting for Review: app version 1.0 with build 4, two subscriptions and their group. Submission e0e5effd-7803-40f1-93fc-c3d8defecfe4.",
       "native_export_verified": true,
       "native_reflection_reopen_verified": true,
-      "native_verification_source": "Direct tester confirmation in the September 30 release conversation; no measured user-study outcomes or production revenue are implied."
+      "native_verification_source": "Direct tester confirmation in the September 30 release conversation; no measured user-study outcomes or production revenue are implied.",
+      "devpost_status": "SUBMITTED",
+      "devpost_submission_url": "https://devpost.com/software/tbd-27jfd0",
+      "devpost_verified_at": "2026-09-30T18:14:41Z",
+      "devpost_evidence": "Entrant completed final submission. Refreshed Devpost finalization page showed SUBMITTED, 5/5 steps done, accepted terms and Project submitted under Alessandra Ascarza."
     },
     "care": {
       "targets": [
