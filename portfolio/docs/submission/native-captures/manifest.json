@@ -1,0 +1,30 @@
+{
+  "captured_at": "2026-09-30T14:27:00Z",
+  "source": "Appetize native iPhone 14 Pro simulator, iOS 17.2, Rehearsal Room 1.0.0 (2)",
+  "eas_build_id": "3282ad3c-a849-440b-b809-ef15adc87244",
+  "method": "Native Screenshot toolbar; original PNG assets downloaded unchanged. No resizing, frame, compositing or generated pixels.",
+  "account": "Disposable fictional capture account; no personal or purchase data.",
+  "images": [
+    {
+      "filename": "home-1179x2556.png",
+      "width": 1179,
+      "height": 2556,
+      "bytes": 185369,
+      "sha256": "a923ff8d5911523978cce7ed171d908dcb5a3f6dc4f009e4e063baf8ed12982b"
+    },
+    {
+      "filename": "scenario-1179x2556.png",
+      "width": 1179,
+      "height": 2556,
+      "bytes": 224798,
+      "sha256": "27dd725f3a8bec9ef90790600d73f2034d991ea54289b7c148600ee4bfe93f3e"
+    },
+    {
+      "filename": "practice-1179x2556.png",
+      "width": 1179,
+      "height": 2556,
+      "bytes": 215135,
+      "sha256": "cc521d2996700f0a9cb38264f7fd8deb76affa3678ba81fcf385799662ae1128"
+    }
+  ]
+}

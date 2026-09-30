@@ -9,7 +9,8 @@ Student entrant and owner: **Alessandra Ascarza**. The product reflects her idea
 - [Public MIT source](https://github.com/samdev-03/Shipaton_Portfolio) and [license](../../../LICENSE).
 - [Live web companion](https://rehearsal-room-api-tooj.onrender.com), useful for the free guided workflow. This is a companion; the submitted mobile app is iOS.
 - Native release: **1.0.0 (2)**, built and installed through TestFlight. App Store publication is pending.
-- Native demo and submission media are being prepared; this guide will link the final public demo when available.
+- [Original native home screenshot](native-captures/home-1179x2556.png), [readiness and mode selection](native-captures/scenario-1179x2556.png), and [guided response with retry](native-captures/practice-1179x2556.png): unmodified iPhone 14 Pro simulator PNGs, each 1179 × 2556 without device frames. [Capture provenance and hashes](native-captures/manifest.json).
+- Native demo video is being prepared; this guide will link the final public demo when available.
 
 ## What to inspect
 
@@ -57,6 +58,7 @@ For a native build, follow [the release setup](../RELEASE.md). Expo Go cannot lo
 - [Automated verification](https://github.com/samdev-03/Shipaton_Portfolio/actions/runs/36263573313): 21 domain/API/provider tests, type checking, lint, browser workflows, and iOS/Android bundle exports passed for application commit `1f126a5`.
 - Fresh production checks: account creation, free RevenueCat access verification, guided response, saved reflection, account deletion and invalidated session passed.
 - A dedicated synthetic adult review account with verified Pro received a real AI reply and structured feedback. A synthetic WAV recording was successfully transcribed. Optional processing was disabled again and test practice removed afterward.
+- Native simulator sign-in, scenario readiness, guided response and wording feedback were observed on September 30. Original screenshots are linked above. This does not establish successful purchase, restore, microphone access or the complete native workflow.
 - TestFlight installation of native build 2 is verified. Native purchase, restore, microphone behavior and full device workflow results are being collected separately.
 
 The API checks do not establish native purchase success, user outcomes, production revenue or App Store approval. [The evidence ledger](evidence.json) records these separately. No fabricated usage or growth metrics are supplied.

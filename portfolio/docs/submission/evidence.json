@@ -2,7 +2,7 @@
   "checked_at": "2026-09-30",
   "deadline": "2026-10-01T06:45:00Z",
   "entrant": {
-    "eligibility_reviewed": false,
+    "eligibility_reviewed": true,
     "adult": true,
     "active_student": true,
     "academic_email_verified": true,
@@ -22,7 +22,7 @@
       "demo_video_url": "",
       "demo_duration_seconds": null,
       "public_repository_url": "https://github.com/samdev-03/Shipaton_Portfolio",
-      "native_screenshot_path": "",
+      "native_screenshot_path": "docs/submission/native-captures/home-1179x2556.png",
       "native_purchase_verified": false,
       "native_restore_verified": false,
       "native_deletion_verified": false,
@@ -40,7 +40,9 @@
       "replit_agent_integration_evidence": "",
       "social_posts": [],
       "live_ai_verified": true,
-      "live_transcription_verified": true
+      "live_transcription_verified": true,
+      "native_sign_in_verified": true,
+      "native_guided_response_verified": true
     },
     "care": {
       "targets": [
