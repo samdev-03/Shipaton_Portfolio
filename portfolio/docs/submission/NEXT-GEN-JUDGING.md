@@ -10,7 +10,7 @@ Student entrant and owner: **Alessandra Ascarza**. The product reflects her idea
 - [Live web companion](https://rehearsal-room-api-tooj.onrender.com), useful for the free guided workflow. This is a companion; the submitted mobile app is iOS.
 - Native release: **1.0.0 (4)** passed the tester-reported phone checks for recording/transcription, microphone-denial fallback, keyboard dismissal and send, reflection save/reopen, and disposable-account export/deletion. Build 4 and both subscriptions were submitted to Apple at **12:49 p.m. EDT on September 30** and are **Waiting for Review**. App Store publication remains pending.
 - [Original native home screenshot](native-captures/home-1179x2556.png), [readiness and mode selection](native-captures/scenario-1179x2556.png), and [guided response with retry](native-captures/practice-1179x2556.png): unmodified iPhone 14 Pro simulator PNGs, each 1179 × 2556 without device frames. [Capture provenance and hashes](native-captures/manifest.json).
-- Native demo video is being prepared; this guide will link the final public demo when available.
+- [Watch the 90-second native iPhone demo](https://vimeo.com/1231760753), narrated by Alessandra Ascarza. It shows guided practice, wording cues, the retry control, saved reflection, Pro options and privacy controls. Real footage is edited for pacing, with some frames held for readability; English captions are included. The recording shows the retry control, while the complete retry path is covered by the source and workflow tests below.
 
 ## Where the Next Gen criteria appear
 

@@ -1,6 +1,6 @@
 # Rehearsal Room · Shipaton portfolio
 
-The active Shipaton submission is **Rehearsal Room**, a native iPhone app for practicing difficult workplace conversations. Its backend is deployed, and the tester confirmed the final voice, fallback, reflection and export/deletion checks pass on TestFlight 1.0.0 (4). The app and subscriptions are Waiting for Review at Apple. The current route is **Next Gen**; the native demo is being recorded. Start with the [Next Gen judging guide](docs/submission/NEXT-GEN-JUDGING.md).
+The active Shipaton submission is **Rehearsal Room**, a native iPhone app for practicing difficult workplace conversations. Its backend is deployed, and the tester confirmed the final voice, fallback, reflection and export/deletion checks pass on TestFlight 1.0.0 (4). The app and subscriptions are Waiting for Review at Apple. The current route is **Next Gen**; the [90-second native iPhone demo](https://vimeo.com/1231760753) is public with English captions. Start with the [Next Gen judging guide](docs/submission/NEXT-GEN-JUDGING.md).
 
 The repository contains three additional prototypes sharing its Expo/React Native and Node 24 foundation. Their historical category plans below are not claims of separate completed submissions.
 
