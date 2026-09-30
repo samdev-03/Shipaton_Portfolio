@@ -1,4 +1,18 @@
-# Release progress — September 26, 2026
+# Release progress
+
+## Continuation checkpoint — September 30, 13:52 UTC
+
+This checkpoint supersedes older statuses below. Neither Apple review nor the final Devpost entry has been submitted.
+
+- Current tested application source is `1f126a5b3b710fdc7922f6b17864cf910bd2fb1a`; [GitHub verification](https://github.com/samdev-03/Shipaton_Portfolio/actions/runs/36263573313) passed 21 domain/API/provider tests, type checking, lint, browser workflows and iOS/Android bundle exports. Render deployment `dep-das14pivcj2c73aesfo0` is live.
+- The existing OpenAI key now works without replacement. At 13:38 UTC a synthetic adult review account with verified Pro received a real AI reply, structured feedback and successful WAV transcription (HTTP 200). Test practice was removed and optional processing reset afterward. Fresh guided/account/deletion API checks passed at 13:40 UTC. These checks do not establish native microphone or purchase behavior.
+- The entrant confirmed that the product reflects Alessandra's ideas and creative direction, that she owns all resulting rights, and that her Devpost account uses her active academic email. Contracted technical assistance remains disclosed. The current entry focus is Next Gen.
+- Alessandra's sole-owner Devpost draft `1195853-rehearsal-room` now has its original 1024px icon uploaded as both thumbnail and captioned gallery image. The saved story and private judging notes describe actual September 30 verification and the Next Gen route. The required native screenshot, public native demo and final submission are still outstanding.
+- Apple's monthly and annual Pro products are now saved at the same service level (1), consistent with their identical features. Store and subscription review screenshots are still missing. Build 2 remains the selected release candidate.
+- Native simulator build `3282ad3c-a849-440b-b809-ef15adc87244` is running in EAS with the new `simulator-rehearsal` profile. The intended capture route is Appetize's free tier; account verification is being completed by the user. Expo's own cloud simulator remains unavailable for this account. No simulator screenshot is yet claimed.
+- The user can test and record on an iPhone. Native guided workflow, sandbox purchase, restore, microphone, export and disposable-account deletion results remain pending. The iPhone 13's 1170 × 2532 screenshot does not meet Devpost's 1179 × 2556 requirement; iPhone 14 Pro does.
+- A [Next Gen judging guide](submission/NEXT-GEN-JUDGING.md) maps the product walkthrough to the RevenueCat implementation, reproducible setup and dated evidence. No native transaction, revenue, user-study, campaign or experiment result is invented.
+- Deadline: September 30, 11:45 p.m. PDT / October 1, 06:45 UTC. The user must perform the final prize-entry action after the actual media and remaining eligibility checks are complete.
 
 ## Continuation checkpoint — 18:15 UTC
 

@@ -6,6 +6,8 @@ Owned by Alessandra Ascarza. Development includes contracted technical assistanc
 
 The active release is **Rehearsal Room: Career Prep** for iPhone. This repository also contains three other app variants that share its foundation. All application source, setup instructions, tests, and release documentation are in [`portfolio/`](portfolio/README.md).
 
+**Shipaton Next Gen reviewers:** start with the [judging guide](portfolio/docs/submission/NEXT-GEN-JUDGING.md) for the product walkthrough, RevenueCat implementation map, reproducible setup and dated verification evidence.
+
 ## Development
 
 Requires Node.js 24.
@@ -31,7 +33,7 @@ The GitHub Actions workflow also exports web and native bundles and exercises we
 
 ## Release status
 
-The web companion is deployed on Render. App Store publication, native purchase verification, and hackathon eligibility evidence are still being completed. See [`portfolio/docs/RELEASE.md`](portfolio/docs/RELEASE.md) and [`portfolio/TODO-RELEASE.md`](portfolio/TODO-RELEASE.md). Draft submission statements must be updated to reflect verified results before submission.
+As of September 30, 2026, the backend and [web companion](https://rehearsal-room-api-tooj.onrender.com) are live, and iOS 1.0.0 (2) is installed through TestFlight. Live guided practice, real AI feedback, voice transcription, RevenueCat access verification and account deletion checks pass. App Store publication and native purchase/restore verification remain pending. The current submission focus is **Next Gen**, evaluated from the native demo and this public MIT source. See the [judging guide](portfolio/docs/submission/NEXT-GEN-JUDGING.md) for the exact scope and limitations.
 
 ## License
 

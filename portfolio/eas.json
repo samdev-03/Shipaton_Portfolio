@@ -29,6 +29,15 @@
       },
       "node": "24.19.0"
     },
+    "simulator-rehearsal": {
+      "extends": "production-rehearsal",
+      "distribution": "internal",
+      "autoIncrement": false,
+      "ios": {
+        "simulator": true,
+        "buildConfiguration": "Release"
+      }
+    },
     "production-care": {
       "autoIncrement": true,
       "env": {

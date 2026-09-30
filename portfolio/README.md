@@ -1,10 +1,12 @@
 # Rehearsal Room · Shipaton portfolio
 
-Four distinct mobile applications with a shared Expo/React Native client foundation and a Node 24 API. Prepared for Windows 11 and JetBrains IDEs. **This is a verified release candidate, not a deployed or store-approved product.** Service credentials, signed-device testing, operator details, publication and real growth evidence remain owner tasks.
+The active Shipaton submission is **Rehearsal Room**, a native iPhone app for practicing difficult workplace conversations. Its backend is deployed and iOS 1.0.0 (2) is installed through TestFlight. The current route is **Next Gen**; public App Store release is pending. Start with the [Next Gen judging guide](docs/submission/NEXT-GEN-JUDGING.md).
+
+The repository contains three additional prototypes sharing its Expo/React Native and Node 24 foundation. Their historical category plans below are not claims of separate completed submissions.
 
 | Build variant | Implemented workflow | Intended entry focus |
 | --- | --- | --- |
-| `rehearsal` | Scenario → practice → feedback → retry → reflection | Career, Design, OneSignal; Next Gen if eligible |
+| `rehearsal` | Scenario → practice → feedback → retry → reflection | Next Gen; current active entry |
 | `care` | Private circle → invite → claim → acknowledge → hand off or complete | Peace |
 | `meal` | Meal + constraints → additions → save → paid weekly plan | Nutrition |
 | `quote` | Cleaning scope → itemized quote → customer approval → follow-up | Monetization, Replit, Stripe funnel |

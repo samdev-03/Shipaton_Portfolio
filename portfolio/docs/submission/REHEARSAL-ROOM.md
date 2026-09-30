@@ -1,51 +1,66 @@
-# Rehearsal Room — entry draft
-
-Status: copy prepared from the implemented release candidate. Replace bracketed evidence fields after launch; do not submit unverified claims.
-
-**Tagline:** A little room to find your words before the real conversation.
-
 ## Inspiration
 
-A difficult workplace conversation often starts long before the meeting: rehearsing in your head, avoiding the subject, or searching for the perfect sentence. Rehearsal Room gives new managers and early-career professionals a private place to say something imperfect, notice what could help, and try again.
+A difficult workplace conversation often starts long before the meeting. We rehearse it in our heads, avoid the subject, or search for a perfect opening sentence.
+
+Rehearsal Room gives new managers and early-career professionals a private place to say something imperfect, receive one practical adjustment, and try the moment again before the stakes are real.
 
 ## What it does
 
-Choose a moment: an overloaded workload, overlooked contribution, compensation conversation, useful feedback, a career interview, or growing client scope. Respond to a counterpart, receive a small adjustment, and retry the exact moment you want to improve. A before-and-after readiness reflection records how you feel without presenting a psychological score as a fact about you.
+Choose a realistic workplace situation:
 
-Two guided scenarios are free. Guided mode uses transparent wording cues and fixed responses. Pro adds the full scenario library and, with explicit consent, a responsive AI counterpart and optional voice transcription. Speech playback lets you hear a response. Saved history, deletion and export keep the space under your control. Native reminders arrive only after consent and scheduling.
+- Set a boundary when your workload is full
+- Make an overlooked contribution visible
+- Ask for a raise
+- Give useful feedback
+- Tell your story in an interview
+- Clarify growing client scope
 
-## How it was built
+Respond in your own words, see a supportive wording cue, and continue the conversation. The central interaction is retry: select the exact response you want to improve and explore a different branch without restarting the entire rehearsal.
 
-Expo Router and React Native provide the mobile app and a web companion. The Node 24 API enforces authentication, ownership and version checks. SQLite stores encrypted content. RevenueCat handles native purchases and restore; the server verifies access against subscriber state. OneSignal delivers generic reminders. Layers records optional non-content product events and a stable first-step copy experiment. OpenAI text responses use a structured schema with storage disabled; private text is excluded from growth events.
+A before-and-after reflection records how ready you feel without pretending to measure your personality, employability, or career potential.
+
+Two guided scenarios are available free from age 16, with parent or guardian permission required for ages 16–17. Rehearsal Room Pro adds the complete scenario library. Optional AI practice and voice transcription require explicit permission and an adult account (18+). Users can save, revisit, export, or delete their practice.
+
+## How we built it
+
+Rehearsal Room is built with Expo Router, React Native, and TypeScript, supported by a Node.js API and SQLite storage.
+
+RevenueCat makes the paid boundary explicit: two useful guided scenarios are free, while Pro unlocks all six scenarios and optional adult-only AI practice. Monthly and annual Apple subscriptions map to the same rehearsal_pro entitlement through the default offering. The native SDK handles purchase and restore; the backend independently verifies access and processes authenticated subscription webhooks. The client cannot grant itself Pro. A live webhook check and complimentary entitlement verification passed; native purchase and restore are undergoing device testing.
+
+The source includes optional OneSignal reminders and Layers analytics, but these services are not enabled in this release and no delivery or experiment results are claimed. Private rehearsal text is excluded from growth events. Optional AI responses use structured output, and AI processing remains disabled until the user explicitly enables it.
+
+Authentication, encrypted stored content, expiring sessions, recovery codes, data export, account deletion, ownership checks, and stale-update protection are enforced by the API.
 
 ## A design decision worth seeing
 
-Watch the retry interaction. It replaces a selected response and the following branch, allowing the person to work on one sentence instead of restarting. Soft colors, large touch targets, clear hierarchy, supportive language and a short feedback card keep the focus on practice. See `docs/DESIGN.md` for the design rationale and accessibility review.
+The most important interaction is not a score—it is the next attempt.
 
-## Challenges and learning
+Feedback is deliberately short and actionable. The interface uses gentle colors, large touch targets, clear speaker labels, and a focused retry state. Rather than judging someone’s personality, Rehearsal Room helps them test a different sentence.
 
-The key technical challenge was preserving trust at boundaries: stale edits cannot overwrite new practice, a client cannot grant itself Pro, and optional analytics cannot contain conversation text. Automated checks exercise those boundaries. The current implementation is a release candidate; native-device behavior and external delivery must be verified separately.
+## Challenges
 
-Observed user learning: [date, number of consenting participants, friction observed, concrete change, follow-up result].
+The hardest part was preserving trust across system boundaries.
 
-## Category statements
+A stale client should not overwrite a newer rehearsal. A user should not be able to manufacture a premium entitlement. Optional analytics should never contain private conversation text. Notification retries should not produce duplicate reminders. Account deletion must remove content and queue deletion requests for connected providers.
 
-Career: the product supports active rehearsal of ordinary managerial conversations, including boundaries and feedback. Its value is the next attempt, not a promise of promotion or income.
+The automated test suite exercises these boundaries alongside the core rehearsal workflow.
 
-Design: show the home hierarchy, counterpart/you conversation layout, focused retry state, and gentle feedback. Do not claim unimplemented gesture or animation systems.
+## Accomplishments
 
-HAMM: two useful scenarios demonstrate value before Pro; pricing is localized from real products. [Insert Offering, trial configuration, dated paywall exposure and verified purchase results.]
+We created a complete practice loop that moves from choosing a difficult moment to responding, receiving a useful adjustment, retrying one turn, reflecting, and saving the result.
 
-OneSignal: [insert App ID, deployed campaign, consenting audience, delivery proof and what it changed].
+The same codebase supports web review and signed native builds while keeping purchases, notifications, analytics, and optional AI processing behind explicit controls.
 
-Layers: [insert build/SDK verification, experiment sample and measured learning].
+## What we learned
 
-BuildInPublic: [link real posts and identify feedback that changed the product].
+Our design hypothesis is that people preparing for difficult conversations benefit from trying one sentence, noticing what could improve, and immediately trying it again. This still needs validation with consenting users.
 
-Grand: [first release date, RevenueCat export, acquisition costs if any, conversion/retention, experiments and next step].
+That hypothesis shaped the product around focused rehearsal, without personality scoring or promises about career outcomes.
 
-Next Gen: [verified academic eligibility, public repository URL, license and video].
+## What’s next
 
-## Submission fields to complete
+As of September 30, the production backend is deployed, the source is public under the MIT license, and iOS 1.0.0 (build 2) is installed through TestFlight. All 21 automated domain, API and provider tests pass, together with browser workflows and iOS/Android bundle exports. Fresh live checks passed for account creation, guided practice, saved reflection, subscription-status verification, a real AI response with structured feedback, voice transcription, and deletion. Native workflow testing is underway; App Store publication is still pending. This entry is being prepared for the Next Gen Award, which evaluates the demo and public source.
 
-Store URL: [pending] · Demo URL: [pending] · Native screenshot: [pending] · Judge trial/promo instructions: [pending] · Public source, if applicable: [pending].
+Rehearsal Room is owned by active student entrant Alessandra Ascarza and reflects her ideas and creative direction. A contractor assisted with implementation and release operations. No production revenue, user-study outcome, or sponsor experiment result is claimed.
+
+After launch, the first product experiment will test which starting prompt helps more users complete their first rehearsal while preserving the app’s supportive, privacy-conscious experience.

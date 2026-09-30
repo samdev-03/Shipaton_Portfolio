@@ -14,7 +14,7 @@ Record each app separately on the platform being submitted. Target 95–110 seco
 | 78–93 | Show the actual native paywall and restore control; show consent settings | “Pro adds all six scenarios. RevenueCat powers the monthly and annual options. Optional AI and voice are available only to adults, with their permission.” |
 | 93–105 | Show privacy controls, then home | “Guided practice is available from age 16, with guardian permission under 18. You control processing, export and deletion in Settings. A little practice before the real conversation.” |
 
-Only demonstrate AI after live checks pass; API funding is currently outstanding. OneSignal and Layers are not configured in this native release, so omit notification and experiment claims. Capture a separate silent proof clip of sandbox purchase/restore for review; it is not live revenue evidence.
+Live AI and transcription checks passed on September 30. Demonstrate these features only after they also work on the recording device. OneSignal and Layers are not configured in this native release, so omit notification and experiment claims. Capture a separate silent proof clip of sandbox purchase/restore for review; it is not live revenue evidence.
 
 ## Care Relay · target 100 seconds
 

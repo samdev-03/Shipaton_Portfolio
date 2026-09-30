@@ -1,20 +1,18 @@
 {
-  "checked_at": "2026-09-26",
+  "checked_at": "2026-09-30",
   "deadline": "2026-10-01T06:45:00Z",
   "entrant": {
     "eligibility_reviewed": false,
     "adult": true,
     "active_student": true,
-    "academic_email_verified": false,
-    "guardian_consent_if_required": false
+    "academic_email_verified": true,
+    "guardian_consent_if_required": false,
+    "creative_rights_confirmed": true
   },
   "apps": {
     "rehearsal": {
       "targets": [
-        "Career",
-        "Design",
-        "NextGen",
-        "HAMM"
+        "NextGen"
       ],
       "store_url": "",
       "first_public_release": "",
@@ -40,7 +38,9 @@
       "replit_username": "",
       "replit_preview_url": "",
       "replit_agent_integration_evidence": "",
-      "social_posts": []
+      "social_posts": [],
+      "live_ai_verified": true,
+      "live_transcription_verified": true
     },
     "care": {
       "targets": [
