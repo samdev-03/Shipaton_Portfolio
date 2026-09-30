@@ -25,7 +25,7 @@ Two guided scenarios are available free from age 16, with parent or guardian per
 
 Rehearsal Room is built with Expo Router, React Native, and TypeScript, supported by a Node.js API and SQLite storage.
 
-RevenueCat makes the paid boundary explicit: two useful guided scenarios are free, while Pro unlocks all six scenarios and optional adult-only AI practice. Monthly and annual Apple subscriptions map to the same rehearsal_pro entitlement through the default offering. The native SDK handles purchase and restore; the backend independently verifies access and processes authenticated subscription webhooks. The client cannot grant itself Pro. A live webhook check and complimentary entitlement verification passed; native purchase and restore are undergoing device testing.
+RevenueCat makes the paid boundary explicit: two useful guided scenarios are free, while Pro unlocks all six scenarios and optional adult-only AI practice. Monthly and annual Apple subscriptions map to the same rehearsal_pro entitlement through the default offering. The native SDK handles purchase and restore; the backend independently verifies access and processes authenticated subscription webhooks. The client cannot grant itself Pro. A live webhook check and complimentary entitlement verification passed. The iPhone tester reported successful purchase and Restore Purchases in TestFlight build 2; these were sandbox transactions, with no production revenue claimed.
 
 The source includes optional OneSignal reminders and Layers analytics, but these services are not enabled in this release and no delivery or experiment results are claimed. Private rehearsal text is excluded from growth events. Optional AI responses use structured output, and AI processing remains disabled until the user explicitly enables it.
 
@@ -43,7 +43,7 @@ The hardest part was preserving trust across system boundaries.
 
 A stale client should not overwrite a newer rehearsal. A user should not be able to manufacture a premium entitlement. Optional analytics should never contain private conversation text. Notification retries should not produce duplicate reminders. Account deletion must remove content and queue deletion requests for connected providers.
 
-The automated test suite exercises these boundaries alongside the core rehearsal workflow.
+The automated test suite exercises these boundaries alongside the core rehearsal workflow. TestFlight testing exposed two crashes around microphone refusal and leaving a practice. We isolated unsafe recorder access during cleanup, added nine lifecycle regression tests, and shipped safe cleanup and visible keyboard dismissal. A later voice report exposed a recording-format mismatch at the transcription provider; a synthetic AAC test reproduced it, and correcting the upload filename and MIME made the live test pass. Explicit phone retesting is still required.
 
 ## Accomplishments
 
@@ -59,7 +59,7 @@ That hypothesis shaped the product around focused rehearsal, without personality
 
 ## What’s next
 
-As of September 30, the production backend is deployed, the source is public under the MIT license, and iOS 1.0.0 (build 2) is installed through TestFlight. All 21 automated domain, API and provider tests pass, together with browser workflows and iOS/Android bundle exports. Fresh live checks passed for account creation, guided practice, saved reflection, subscription-status verification, a real AI response with structured feedback, voice transcription, and deletion. Native workflow testing is underway; App Store publication is still pending. This entry is being prepared for the Next Gen Award, which evaluates the demo and public source.
+As of September 30, the production backend is deployed, the source is public under the MIT license, and iOS 1.0.0 (build 4) is available through TestFlight. All 31 automated tests pass, together with type checking, lint, browser workflows and iOS/Android bundle exports. Fresh live checks passed for account creation, guided practice, saved reflection, subscription-status verification, a real AI response with structured feedback, synthetic-audio transcription, and deletion. Build 4 retains fixes for two reported crash paths and removes unused advertising declarations; the live backend corrects native recording upload formatting. Explicit phone retesting, the native demo and App Store publication are still pending. This entry is being prepared for the Next Gen Award, which evaluates the demo and public source.
 
 Rehearsal Room is owned by active student entrant Alessandra Ascarza and reflects her ideas and creative direction. A contractor assisted with implementation and release operations. No production revenue, user-study outcome, or sponsor experiment result is claimed.
 

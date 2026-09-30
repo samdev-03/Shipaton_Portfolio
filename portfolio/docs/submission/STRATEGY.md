@@ -2,7 +2,7 @@
 
 ## Current decision — September 30, 2026
 
-Concentrate the remaining time on one complete, truthful **Rehearsal Room Next Gen** entry: working native demo, exact-size native screenshot, public MIT source, clear RevenueCat implementation and student ownership. The backend and TestFlight build are available; real AI/transcription checks now pass. Native purchase/restore and final media are still being verified. App Store review can proceed when its remaining assets and tests are ready, but a pending store release does not qualify the app for categories requiring publication.
+Concentrate the remaining time on one complete, truthful **Rehearsal Room Next Gen** entry: working native demo, exact-size native screenshot, public MIT source, clear RevenueCat implementation and student ownership. The backend and TestFlight build 4 are available; real AI and synthetic-audio transcription checks pass. The tester reported successful sandbox purchase/restore on build 2. Explicit phone retesting after recorder and transcription fixes, plus the final native demo, remain necessary. App Store review can proceed when those checks pass, but a pending store release does not qualify the app for categories requiring publication.
 
 The category slate and schedule below are historical planning, not completed entries or expected prize earnings. See [the current judging guide](NEXT-GEN-JUDGING.md) and [release checkpoint](../RELEASE-PROGRESS.md). Do not spend the remaining submission window creating unsupported sponsor claims or unfinished extra entries.
 

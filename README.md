@@ -33,7 +33,7 @@ The GitHub Actions workflow also exports web and native bundles and exercises we
 
 ## Release status
 
-As of September 30, 2026, the backend and [web companion](https://rehearsal-room-api-tooj.onrender.com) are live, and iOS 1.0.0 (2) is installed through TestFlight. Live guided practice, real AI feedback, voice transcription, RevenueCat access verification and account deletion checks pass. App Store publication and native purchase/restore verification remain pending. The current submission focus is **Next Gen**, evaluated from the native demo and this public MIT source. See the [judging guide](portfolio/docs/submission/NEXT-GEN-JUDGING.md) for the exact scope and limitations.
+As of September 30, 2026, the backend and [web companion](https://rehearsal-room-api-tooj.onrender.com) are live, and iOS 1.0.0 (4) is available through TestFlight. Live guided practice, real AI feedback, synthetic-audio transcription, RevenueCat access verification and account deletion checks pass. The iPhone tester reported successful sandbox purchase and restore on build 2. Build 4 includes fixes for two reported crash paths; the latest server update corrects native voice-upload formatting. Explicit phone retesting and the native demo remain pending, as does App Store publication. The current submission focus is **Next Gen**, evaluated from the native demo and this public MIT source. See the [judging guide](portfolio/docs/submission/NEXT-GEN-JUDGING.md) for the exact scope and limitations.
 
 ## License
 
