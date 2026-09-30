@@ -1,5 +1,17 @@
 # Release progress
 
+## Current checkpoint — September 30, 2026, 19:15 UTC
+
+This checkpoint supersedes the historical entries below. The entrant completed the Devpost submission; the finalization page showed SUBMITTED and 5/5. The native demo, original screenshots and licensed public source are present. Apple remains Waiting for Review, with automatic release and the accepted expedited request already configured.
+
+- Vimeo V3 at https://vimeo.com/1231760753 uses the original 888x1920 footage in a 1920x1080, 90-second edit. All 2700 source-cut frames were compared with the prior approved cut, with 48 visual samples reviewed. Private login/notes screens remain excluded. Public and embedded playback advanced. English captions are retained. SHA256: `c9c5b6357c947ce1c0aada18b285cfc836b1ade0259880214f27a5ba6be0707d`.
+- The same demo is public on YouTube at https://youtu.be/mEiuTSCOYX4 with creator attribution, English subtitles and working playback. No views, engagement or outcomes are claimed as prize evidence.
+- Devpost's introduction, creator contribution and free web companion link were polished and verified publicly. Next Gen remains the submitted category.
+- Google Play app record `4975979931646231460` was created after explicit approval of its declarations. The actual Console requires 12 closed testers for 14 continuous days, shows zero enrolled and disables production access. Android cannot provide a public release by this deadline; no Android billing or device-test success is claimed.
+- Source adds an explicit in-app AI report flow, encrypted storage, operator-only review, export and cascading deletion. This is a subsequent web/source improvement and is not present in the already-submitted iOS build 4. It does not replace that native review submission. Local API/domain/provider/native-privacy tests: 33 passing; typecheck and lint pass; all six browser workflows pass. Native export and deployment results are recorded in the later verification checkpoint.
+- The first local browser attempt used a stale development API address. Rebuilding with isolated test configuration and a cleared Metro cache fixed it; all workflows then passed. No app behavior change was needed for that environment issue.
+
+
 ## Current checkpoint — September 30, 2026, 17:02 UTC
 
 This checkpoint supersedes the historical entries below. Apple review is submitted; the final Devpost entry awaits the native demo and entrant's final submission action.

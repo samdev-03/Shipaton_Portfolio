@@ -497,3 +497,116 @@ test('web cookies, cross-origin requests, fabricated events and oversized input'
   assert.ok(funnel.endsWith('/' + u.user.id));
   assert.ok(!funnel.includes(u.email));
 });
+
+test('AI reports validate consent, scope, version and target; encrypt content and support private review', async (t) => {
+  const f = await fixture(t),
+    u = await f.register(),
+    other = await f.register();
+  const start = await f.call(
+    '/v1/rehearsals',
+    'POST',
+    { scenarioId: 'workload', mode: 'guided', confidence: 3 },
+    u,
+  );
+  const path = '/v1/rehearsals/' + start.body.id + '/report';
+  const input = {
+    version: 1,
+    target: 2,
+    reason: 'harmful',
+    note: 'Fictional safety concern',
+    consent: true,
+  };
+  assert.equal((await f.call(path, 'POST', input, u)).status, 400);
+  const data = {
+    ...start.body,
+    mode: 'ai',
+    messages: [
+      { role: 'assistant', text: 'Opening' },
+      { role: 'user', text: 'PRIVATE USER SENTENCE' },
+      { role: 'assistant', text: 'Fictional reported output' },
+    ],
+    feedback: { strength: 'Cue', next: 'Adjustment', clarity: 1, empathy: 2, specificity: 3 },
+  };
+  f.store.run('UPDATE records SET payload=? WHERE id=?', f.store.seal(data), start.body.id);
+  assert.equal((await f.call(path, 'POST', input)).status, 401);
+  assert.equal((await f.call(path, 'POST', input, other)).status, 404);
+  assert.equal((await f.call(path, 'POST', { ...input, consent: false }, u)).status, 400);
+  assert.equal((await f.call(path, 'POST', { ...input, target: 1 }, u)).status, 400);
+  assert.equal((await f.call(path, 'POST', { ...input, target: 99 }, u)).status, 400);
+  assert.equal((await f.call(path, 'POST', { ...input, version: 2 }, u)).status, 409);
+  assert.equal((await f.call(path, 'POST', { ...input, note: 'x'.repeat(1001) }, u)).status, 400);
+  const report = await f.call(path, 'POST', input, u);
+  assert.equal(report.status, 201);
+  assert.equal((await f.call(path, 'POST', input, u)).body.id, report.body.id);
+  assert.equal(f.store.get('SELECT COUNT(*) n FROM safety_reports').n, 1);
+  const stored = f.store.get(
+    'SELECT payload FROM safety_reports WHERE id=?',
+    report.body.id,
+  ).payload;
+  assert.ok(!stored.includes('Fictional'));
+  assert.equal(f.store.open(stored).content, 'Fictional reported output');
+  const exported = (await f.call('/v1/export', 'GET', undefined, u)).body.safetyReports;
+  assert.equal(exported.length, 1);
+  assert.ok(!JSON.stringify(exported).includes('PRIVATE USER SENTENCE'));
+  assert.equal((await f.call('/v1/export', 'GET', undefined, other)).body.safetyReports.length, 0);
+  assert.equal((await f.call('/ops/safety-reports', 'GET', undefined, u)).status, 401);
+  const ops = { Authorization: 'Bearer ' + 'o'.repeat(40) };
+  const queue = await f.call('/ops/safety-reports', 'GET', undefined, undefined, ops);
+  assert.equal(queue.body.items[0].id, report.body.id);
+  assert.ok(!JSON.stringify(queue.body).includes(u.email));
+  assert.equal(
+    (
+      await f.call(
+        '/ops/safety-reports/' + report.body.id + '/reviewed',
+        'POST',
+        {},
+        undefined,
+        ops,
+      )
+    ).status,
+    200,
+  );
+  assert.equal(
+    (await f.call('/ops/safety-reports', 'GET', undefined, undefined, ops)).body.items.length,
+    0,
+  );
+  assert.equal((await f.call(path, 'POST', { ...input, target: 'feedback' }, u)).status, 201);
+  await f.call('/v1/rehearsals/' + start.body.id, 'DELETE', undefined, u);
+  assert.equal(f.store.get('SELECT COUNT(*) n FROM safety_reports').n, 0);
+});
+
+test('AI reports are rate limited without requiring paid access and disappear on account deletion', async (t) => {
+  const f = await fixture(t),
+    u = await f.register();
+  const start = await f.call(
+    '/v1/rehearsals',
+    'POST',
+    { scenarioId: 'workload', mode: 'guided', confidence: 3 },
+    u,
+  );
+  const messages = Array.from({ length: 23 }, (_, i) => ({
+    role: i % 2 ? 'user' : 'assistant',
+    text: 'Fictional ' + i,
+  }));
+  f.store.run(
+    'UPDATE records SET payload=? WHERE id=?',
+    f.store.seal({ ...start.body, mode: 'ai', messages }),
+    start.body.id,
+  );
+  for (let i = 0; i < 11; i++) {
+    const r = await f.call(
+      '/v1/rehearsals/' + start.body.id + '/report',
+      'POST',
+      {
+        version: 1,
+        target: i * 2,
+        reason: 'other',
+        consent: true,
+      },
+      u,
+    );
+    assert.equal(r.status, i < 10 ? 201 : 429);
+  }
+  assert.equal((await f.call('/v1/account', 'DELETE', { password }, u)).status, 200);
+  assert.equal(f.store.get('SELECT COUNT(*) n FROM safety_reports').n, 0);
+});

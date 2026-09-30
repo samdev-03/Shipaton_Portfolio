@@ -21,8 +21,8 @@
       "judge_access_valid_until": "",
       "demo_video_url": "https://vimeo.com/1231760753",
       "demo_duration_seconds": 90,
-      "demo_evidence": "September 30: public Vimeo visibility, completed processing, 01:30 duration and advancing playback verified. Actual supplied iPhone TestFlight footage and Alessandra's narration, edited for pacing with captions. The retry control is shown; a complete retry interaction is not demonstrated in this cut. Personal account and Apple sign-in screens are excluded.",
-      "demo_file_sha256": "49711c124ef4c32fc00f9115a88a620c1b44350de4ce31d93f87ca7d8c62a838",
+      "demo_evidence": "September 30: Vimeo V3 upgraded from the original 888x1920 recording using the same approved edit. 1920x1080, exactly 90 seconds. All 2700 source-cut frames compared to the approved low-resolution cut; 48 timeline samples visually checked. No credentials/login/private notes included. Vimeo and Devpost embedded playback advanced. English captions retained. Retry control shown, full retry interaction not demonstrated.",
+      "demo_file_sha256": "c9c5b6357c947ce1c0aada18b285cfc836b1ade0259880214f27a5ba6be0707d",
       "public_repository_url": "https://github.com/samdev-03/Shipaton_Portfolio",
       "native_screenshot_path": "docs/submission/native-captures/home-1179x2556.png",
       "native_purchase_verified": true,
@@ -62,7 +62,12 @@
       "devpost_status": "SUBMITTED",
       "devpost_submission_url": "https://devpost.com/software/tbd-27jfd0",
       "devpost_verified_at": "2026-09-30T18:14:41Z",
-      "devpost_evidence": "Entrant completed final submission. Refreshed Devpost finalization page showed SUBMITTED, 5/5 steps done, accepted terms and Project submitted under Alessandra Ascarza."
+      "devpost_evidence": "Entrant completed final submission. Refreshed Devpost finalization page showed SUBMITTED, 5/5 steps done, accepted terms and Project submitted under Alessandra Ascarza.",
+      "secondary_demo_url": "https://youtu.be/mEiuTSCOYX4",
+      "secondary_demo_evidence": "Public YouTube publication and advancing 1:30 playback with the supplied English captions verified September 30. Creator attribution and contracted technical assistance disclosed.",
+      "android_status": "Google Play app record created with authorization. Console requires 12 closed-test participants for 14 continuous days; zero opted in. No production access, build upload, Android purchase verification or public release claimed.",
+      "google_play_app_id": "4975979931646231460",
+      "devpost_polish": "Public intro links the native demo and judging guide; live free web companion added to Try it out; creator contribution clarified. Public render verified and submitted status retained."
     },
     "care": {
       "targets": [

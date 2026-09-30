@@ -247,6 +247,27 @@ export function createApp({
           });
           return;
         }
+        if (path === '/ops/safety-reports' && method === 'GET') {
+          json({
+            items: store
+              .all(
+                'SELECT * FROM safety_reports WHERE reviewed_at IS NULL ORDER BY created_at LIMIT 100',
+              )
+              .map((r) => ({ id: r.id, ...store.open(r.payload), createdAt: r.created_at })),
+          });
+          return;
+        }
+        const reportReview = path.match(/^\/ops\/safety-reports\/([\w-]+)\/reviewed$/);
+        if (reportReview && method === 'POST') {
+          const changed = store.run(
+            'UPDATE safety_reports SET reviewed_at=? WHERE id=?',
+            now(),
+            reportReview[1],
+          );
+          if (!changed.changes) fail(404, 'Not found.');
+          json({ ok: true });
+          return;
+        }
         if (path === '/ops/privacy-requests' && method === 'GET') {
           json({ items: store.all('SELECT * FROM deletion_jobs') });
           return;
@@ -491,6 +512,14 @@ export function createApp({
         json({
           user: me(u),
           records: store.all('SELECT * FROM records WHERE user_id=?', u.id).map(rec),
+          safetyReports: store
+            .all('SELECT * FROM safety_reports WHERE user_id=?', u.id)
+            .map((r) => ({
+              id: r.id,
+              ...store.open(r.payload),
+              createdAt: r.created_at,
+              reviewedAt: r.reviewed_at,
+            })),
           quotes: store.all('SELECT * FROM quotes WHERE user_id=?', u.id).map(quote),
           circles: store
             .all(
@@ -674,7 +703,7 @@ export function createApp({
           event(u, 'scenario_started');
           return;
         }
-        const m = path.match(/^\/v1\/rehearsals\/([\w-]+)(\/(turn|complete))?$/);
+        const m = path.match(/^\/v1\/rehearsals\/([\w-]+)(\/(turn|complete|report))?$/);
         if (m) {
           const r = own(m[1], u, 'rehearsal'),
             d = store.open(r.payload);
@@ -685,6 +714,44 @@ export function createApp({
           if (method === 'DELETE' && !m[2]) {
             store.run('DELETE FROM records WHERE id=?', r.id);
             json({ ok: true });
+            return;
+          }
+          if (method === 'POST' && m[3] === 'report') {
+            const b = parse(schemas.safetyReport, await body());
+            if (d.mode !== 'ai') fail(400, 'Only AI practice content can be reported here.');
+            if (b.version !== r.version)
+              fail(409, 'The practice changed. Reopen it before reporting.');
+            const content = b.target === 'feedback' ? d.feedback : d.messages[b.target];
+            if (!content || (b.target !== 'feedback' && content.role !== 'assistant'))
+              fail(400, 'Choose an AI response or feedback.');
+            const targetHash = hash(r.id + ':' + r.version + ':' + b.target);
+            const existing = store.get(
+              'SELECT id FROM safety_reports WHERE user_id=? AND target_hash=?',
+              u.id,
+              targetHash,
+            );
+            if (existing) {
+              json({ ok: true, id: existing.id });
+              return;
+            }
+            limit('safety-report:' + u.id, 10, day);
+            const reportId = randomUUID();
+            store.run(
+              'INSERT INTO safety_reports VALUES(?,?,?,?,?,?,NULL)',
+              reportId,
+              u.id,
+              r.id,
+              targetHash,
+              store.seal({
+                scenarioId: d.scenarioId,
+                target: b.target,
+                content: b.target === 'feedback' ? content : content.text,
+                reason: b.reason,
+                note: b.note,
+              }),
+              now(),
+            );
+            json({ ok: true, id: reportId }, 201);
             return;
           }
           if (method === 'POST' && m[3] === 'turn') {

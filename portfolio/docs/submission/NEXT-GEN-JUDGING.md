@@ -12,12 +12,14 @@ Student entrant and owner: **Alessandra Ascarza**. The product reflects her idea
 - [Original native home screenshot](native-captures/home-1179x2556.png), [readiness and mode selection](native-captures/scenario-1179x2556.png), and [guided response with retry](native-captures/practice-1179x2556.png): unmodified iPhone 14 Pro simulator PNGs, each 1179 × 2556 without device frames. [Capture provenance and hashes](native-captures/manifest.json).
 - [Watch the 90-second native iPhone demo](https://vimeo.com/1231760753), narrated by Alessandra Ascarza. It shows guided practice, wording cues, the retry control, saved reflection, Pro options and privacy controls. Real footage is edited for pacing, with some frames held for readability; English captions are included. The recording shows the retry control, while the complete retry path is covered by the source and workflow tests below.
 
+The public demo has been upgraded from the original higher-resolution iPhone recording without changing the approved content. A captioned [YouTube mirror](https://youtu.be/mEiuTSCOYX4) is also available. The Devpost entry is submitted. Google Play preparation encountered a 12-tester / 14-day production gate; Android store publication is not claimed.
+
 ## Where the Next Gen criteria appear
 
 | Criterion | What to look for |
 | --- | --- |
 | Clear, useful idea | A new manager can rehearse a workload boundary and leave with a concrete next sentence. The focused retry makes changing one response the central action. |
-| Meaningful working progress | The native walkthrough connects readiness, response, feedback, retry and saved reflection. Dated phone and automated test evidence appears below. |
+| Meaningful working progress | The native walkthrough connects readiness, response, feedback and saved reflection, and shows the retry control. Source and workflow tests cover executing a retry. Dated phone and automated test evidence appears below. |
 | Thoughtful RevenueCat use | Two useful scenarios stay free; one entitlement covers both subscription durations. [Purchase/restore UI](../../src/app/pro.tsx), [SDK integration](../../src/lib/sdk.ts), and [server verification/webhooks](../../server/app.mjs) show the complete boundary. |
 | Product and technical care | Optional AI consent, age enforcement, encrypted stored content, export/deletion, stale-update protection, and regression tests address risks created by private rehearsal data and native lifecycle changes. |
 

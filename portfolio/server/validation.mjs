@@ -64,6 +64,15 @@ export const schemas = {
       retryIndex: z.number().int().min(1).optional(),
     })
     .strict(),
+  safetyReport: z
+    .object({
+      version: z.number().int().positive(),
+      target: z.union([z.number().int().min(0), z.literal('feedback')]),
+      reason: z.enum(['harmful', 'offensive', 'misleading', 'privacy', 'other']),
+      note: optional(1000),
+      consent: z.literal(true),
+    })
+    .strict(),
   complete: z.object({ confidence: z.number().int().min(1).max(5) }).strict(),
   name: z.object({ name: s(80) }).strict(),
   invite: z.object({ code: s(100) }).strict(),

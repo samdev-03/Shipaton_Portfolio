@@ -53,6 +53,7 @@ export function createStore(path, key) {
  CREATE TABLE IF NOT EXISTS reminders(id TEXT PRIMARY KEY,user_id TEXT REFERENCES users(id) ON DELETE CASCADE,due_at INTEGER NOT NULL,state TEXT DEFAULT 'pending',attempts INTEGER DEFAULT 0,next_attempt INTEGER NOT NULL,provider_id TEXT);
  CREATE TABLE IF NOT EXISTS deletion_jobs(id TEXT PRIMARY KEY,app TEXT NOT NULL,user_id TEXT NOT NULL,provider TEXT NOT NULL,state TEXT DEFAULT 'pending',attempts INTEGER DEFAULT 0,next_attempt INTEGER NOT NULL);
  CREATE TABLE IF NOT EXISTS events(id TEXT PRIMARY KEY,user_id TEXT REFERENCES users(id) ON DELETE CASCADE,app TEXT NOT NULL,name TEXT NOT NULL,variant TEXT NOT NULL,created_at INTEGER NOT NULL);
+ CREATE TABLE IF NOT EXISTS safety_reports(id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,rehearsal_id TEXT NOT NULL REFERENCES records(id) ON DELETE CASCADE,target_hash TEXT NOT NULL,payload TEXT NOT NULL,created_at INTEGER NOT NULL,reviewed_at INTEGER,UNIQUE(user_id,target_hash));
  CREATE TABLE IF NOT EXISTS limits(key TEXT PRIMARY KEY,count INTEGER NOT NULL,expires_at INTEGER NOT NULL);`);
   const secret = Buffer.from(key, 'hex');
   return {

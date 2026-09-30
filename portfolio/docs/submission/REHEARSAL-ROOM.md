@@ -1,3 +1,9 @@
+## Start with the working app
+
+[Watch the 90-second native iPhone demo](https://vimeo.com/1231760753) · [Inspect the public MIT source and judging guide](https://github.com/samdev-03/Shipaton_Portfolio/blob/main/portfolio/docs/submission/NEXT-GEN-JUDGING.md)
+
+The demo shows a real workload rehearsal, wording feedback, the retry control, saved reflection, and native monthly/annual Pro options. The judging guide maps the Next Gen criteria to implementation and dated test evidence. Rehearsal Room is submitted by student owner Alessandra Ascarza, whose product ideas and creative direction guided the project; contracted technical assistance supported implementation and release.
+
 ## Inspiration
 
 A difficult workplace conversation often starts long before the meeting. We rehearse it in our heads, avoid the subject, or search for a perfect opening sentence.

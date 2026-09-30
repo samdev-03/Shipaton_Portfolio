@@ -111,3 +111,53 @@ test('quote: itemized quote, paywall and public privacy', async ({ page }) => {
   await page.getByRole('button', { name: 'Privacy', exact: true }).click();
   await expect(page.getByText('Your privacy matters.', { exact: true })).toBeVisible();
 });
+
+test('AI report UI explains sharing, keeps failed input, and confirms submission in app', async ({
+  page,
+}) => {
+  await signup(page);
+  await page.getByRole('button', { name: /Start a small practice|Find my next sentence/ }).click();
+  await page.getByRole('button', { name: 'Step into the room →', exact: true }).click();
+  await expect(page.getByLabel('Your next sentence', { exact: true })).toBeVisible();
+  // UI-only synthetic AI fixture; the API tests exercise the real encrypted reporting endpoint.
+  await page.route('**/v1/rehearsals/*', async (route) => {
+    if (route.request().method() !== 'GET') return route.continue();
+    const response = await route.fetch();
+    const data = await response.json();
+    await route.fulfill({ response, json: { ...data, mode: 'ai' } });
+  });
+  let submissions = 0;
+  await page.route('**/v1/rehearsals/*/report', async (route) => {
+    const data = route.request().postDataJSON();
+    expect(data).toMatchObject({
+      version: 1,
+      target: 0,
+      reason: 'privacy',
+      note: 'Fictional concern',
+      consent: true,
+    });
+    submissions++;
+    await route.fulfill({
+      status: submissions === 1 ? 503 : 201,
+      json: submissions === 1 ? { error: 'Please try again.' } : { ok: true, id: 'test-report' },
+    });
+  });
+  await page.reload();
+  await page.getByRole('button', { name: 'Report AI response', exact: true }).click();
+  await expect(page.getByText(/The rest of your conversation is not included/)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Send report', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: 'Privacy concern', exact: true }).click();
+  await page.getByLabel('Report details (optional)', { exact: true }).fill('Fictional concern');
+  await page.getByRole('button', { name: 'Send report', exact: true }).click();
+  await expect(page.getByText('Please try again.', { exact: true })).toBeVisible();
+  await expect(page.getByLabel('Report details (optional)', { exact: true })).toHaveValue(
+    'Fictional concern',
+  );
+  await page.getByRole('button', { name: 'Send report', exact: true }).click();
+  await expect(
+    page.getByText('Report received. Thank you for helping improve practice safety.', {
+      exact: true,
+    }),
+  ).toBeVisible();
+  expect(submissions).toBe(2);
+});

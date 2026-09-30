@@ -3,6 +3,7 @@ import { Keyboard } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import * as Speech from 'expo-speech';
 import { Gate } from '../../components/Gate';
+import { ReportAIContent } from '../../components/ReportAIContent';
 import { VoiceInput } from '../../components/VoiceInput';
 import {
   Screen,
@@ -90,6 +91,9 @@ function Content() {
                       }}
                     />
                   ) : null}
+                  {practice.mode === 'ai' && m.role === 'assistant' ? (
+                    <ReportAIContent rehearsalId={id} version={practice.version} target={i} />
+                  ) : null}
                 </Stack>
               </Card>
             ))}
@@ -109,6 +113,13 @@ function Content() {
                   <T kind="caption">
                     Informal wording cues, not a validated assessment of you or your career.
                   </T>
+                  {practice.mode === 'ai' ? (
+                    <ReportAIContent
+                      rehearsalId={id}
+                      version={practice.version}
+                      target="feedback"
+                    />
+                  ) : null}
                 </Stack>
               </Card>
             ) : null}

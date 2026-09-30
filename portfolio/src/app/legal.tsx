@@ -13,7 +13,7 @@ export default function Legal() {
         <T kind="hero">
           {terms ? 'Clear expectations.' : support ? 'A little help.' : 'Your privacy matters.'}
         </T>
-        <T kind="caption">Effective September 26, 2026 · {brand.name}</T>
+        <T kind="caption">Effective September 30, 2026 · {brand.name}</T>
         {config.operatorName ? (
           <T>Operated by {config.operatorName}.</T>
         ) : (
@@ -104,6 +104,14 @@ export default function Legal() {
               and removed after transcription or cancellation; provider processing is also governed
               by provider policies. You can use guided practice without AI processing.
             </T>
+            {appId === 'rehearsal' ? (
+              <T>
+                If you report AI content, you explicitly share the selected response or feedback,
+                scenario, reason and optional note with the operator for safety review. Reports are
+                encrypted in our database and are not sent to analytics or the AI provider. They are
+                included in your export and removed when you delete that rehearsal or account.
+              </T>
+            ) : null}
             <T>
               Account data remains until you delete it or the account. First-party usage events
               expire after 90 days. Deletion removes active account records and queues RevenueCat
