@@ -116,13 +116,13 @@ test('provider diagnostics exclude secrets and content, and preserve audio forma
   for (const [mime, extension] of [
     ['audio/wav', 'wav'],
     ['audio/mpeg', 'mp3'],
-    ['audio/mp4', 'mp4'],
+    ['audio/mp4', 'm4a'],
     ['audio/webm', 'webm'],
     ['audio/m4a', 'm4a'],
   ]) {
     const audioProvider = providers({ OPENAI_API_KEY: 'test' }, async (_url, opts) => {
       assert.equal(opts.body.get('file').name, 'practice.' + extension);
-      assert.equal(opts.body.get('file').type, mime);
+      assert.equal(opts.body.get('file').type, mime === 'audio/mp4' ? 'audio/m4a' : mime);
       return ok({ text: 'A fictional practice response.' });
     });
     assert.equal(
@@ -137,8 +137,16 @@ test('billing diagnostics distinguish credit and spend limits while suppressing 
   t.mock.method(console, 'error', (line) => logged.push(JSON.parse(line)));
   for (const [code, type, expected] of [
     ['credit_balance_exhausted', 'insufficient_quota', 'credit_balance_exhausted'],
-    ['organization_usage_limit_exceeded', 'insufficient_quota', 'organization_usage_limit_exceeded'],
-    ['organization_spend_limit_exceeded', 'insufficient_quota', 'organization_spend_limit_exceeded'],
+    [
+      'organization_usage_limit_exceeded',
+      'insufficient_quota',
+      'organization_usage_limit_exceeded',
+    ],
+    [
+      'organization_spend_limit_exceeded',
+      'insufficient_quota',
+      'organization_spend_limit_exceeded',
+    ],
     ['project_spend_limit_exceeded', 'insufficient_quota', 'project_spend_limit_exceeded'],
     ['private-org-id', 'insufficient_quota', 'insufficient_quota'],
     ['private-org-id', 'private-content', 'unclassified'],

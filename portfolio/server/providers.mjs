@@ -42,7 +42,9 @@ export function providers(env, request = fetch) {
         'permission_denied',
       ]);
       const detail = typeof r.json === 'function' ? await r.json().catch(() => null) : null;
-      const code = [detail?.error?.code, detail?.error?.type].find((value) => knownCodes.has(value));
+      const code = [detail?.error?.code, detail?.error?.type].find((value) =>
+        knownCodes.has(value),
+      );
       const endpoint = new URL(url);
       console.error(
         JSON.stringify({
@@ -186,14 +188,17 @@ export function providers(env, request = fetch) {
     async transcribe(user, audio, mime) {
       if (!user.ai) fail(403, 'Enable AI processing first.');
       if (!env.OPENAI_API_KEY) fail(503, 'Voice transcription is unavailable.');
+      // Native AAC recordings use an M4A container even though the client sends
+      // audio/mp4. Whisper rejects these recordings when named practice.mp4.
+      const uploadMime = mime === 'audio/mp4' ? 'audio/m4a' : mime;
       const form = new FormData();
       form.append('model', 'whisper-1');
       form.append(
         'file',
-        new Blob([audio], { type: mime }),
+        new Blob([audio], { type: uploadMime }),
         'practice.' +
-          ({ 'audio/webm': 'webm', 'audio/wav': 'wav', 'audio/mpeg': 'mp3', 'audio/mp4': 'mp4' }[
-            mime
+          ({ 'audio/webm': 'webm', 'audio/wav': 'wav', 'audio/mpeg': 'mp3', 'audio/m4a': 'm4a' }[
+            uploadMime
           ] || 'm4a'),
       );
       const r = await call('https://api.openai.com/v1/audio/transcriptions', {
