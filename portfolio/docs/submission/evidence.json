@@ -23,10 +23,14 @@
       "demo_duration_seconds": null,
       "public_repository_url": "https://github.com/samdev-03/Shipaton_Portfolio",
       "native_screenshot_path": "docs/submission/native-captures/home-1179x2556.png",
-      "native_purchase_verified": false,
-      "native_restore_verified": false,
+      "native_purchase_verified": true,
+      "native_restore_verified": true,
+      "native_purchase_restore_evidence": "Tester reported successful purchase and Restore Purchases in TestFlight build 1.0.0 (2) on September 30, 2026. Sandbox testing; no production revenue claimed.",
       "native_deletion_verified": false,
       "native_crash_retest_required": true,
+      "native_crash_retest_notes": "Two TestFlight build 2 reports: microphone denial and finishing practice. Build 3 addresses recorder disposal and keyboard access; real-device retest is still required.",
+      "replacement_ios_build": "https://expo.dev/accounts/samdev03/projects/shipaton-rehearsal/builds/395a61f1-42d9-4f8e-b1c4-39fdcd37c1eb",
+      "replacement_build_ci": "https://github.com/samdev-03/Shipaton_Portfolio/actions/runs/36734378066",
       "onesignal_campaign_id": "",
       "onesignal_delivery_verified": false,
       "layers_dashboard_evidence": "",
@@ -43,7 +47,9 @@
       "live_ai_verified": true,
       "live_transcription_verified": true,
       "native_sign_in_verified": true,
-      "native_guided_response_verified": true
+      "native_guided_response_verified": true,
+      "native_ai_response_verified": true,
+      "native_ai_response_evidence": "Tester reported a working AI conversation in TestFlight build 2; finishing the conversation crashed and is tracked separately."
     },
     "care": {
       "targets": [
