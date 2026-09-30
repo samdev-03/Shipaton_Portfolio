@@ -57,6 +57,10 @@ if (process.argv.includes('--server')) {
 }
 if (!process.argv.includes('--config-only')) {
   need(
+    !app.native_crash_retest_required,
+    'Retest the reported native crashes on the replacement build.',
+  );
+  need(
     ledger.entrant.eligibility_reviewed,
     'Record an eligibility review, including residency, conflicts and ownership.',
   );

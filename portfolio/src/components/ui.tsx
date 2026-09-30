@@ -9,6 +9,9 @@ import {
   ActivityIndicator,
   TextInputProps,
   useWindowDimensions,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
@@ -187,15 +190,38 @@ export function Screen({
         </Pressable>
         <T style={{ fontFamily: 'DMSans_700Bold', fontSize: 17 }}>{title || brand.name}</T>
       </Row>
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{ padding: wide ? 36 : 24, paddingBottom: 40, alignItems: 'center' }}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <View style={{ width: '100%', maxWidth: 1000, gap: 24 }}>{children}</View>
-      </ScrollView>
-      {footer}
+        <ScrollView
+          style={{ flex: 1 }}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
+          contentContainerStyle={{
+            padding: wide ? 36 : 24,
+            paddingBottom: 40,
+            alignItems: 'center',
+          }}
+        >
+          <View style={{ width: '100%', maxWidth: 1000, gap: 24 }}>{children}</View>
+        </ScrollView>
+        {footer}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
+}
+export function DismissKeyboard() {
+  const [visible, setVisible] = useState(false);
+  React.useEffect(() => {
+    const show = Keyboard.addListener('keyboardDidShow', () => setVisible(true));
+    const hide = Keyboard.addListener('keyboardDidHide', () => setVisible(false));
+    return () => {
+      show.remove();
+      hide.remove();
+    };
+  }, []);
+  return visible ? <Button quiet title="Hide keyboard" onPress={Keyboard.dismiss} /> : null;
 }
 export function Tabs({ active = 'home' }: { active?: string }) {
   return (

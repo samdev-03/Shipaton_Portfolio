@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Keyboard } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import * as Speech from 'expo-speech';
 import { Gate } from '../../components/Gate';
@@ -10,6 +11,7 @@ import {
   Card,
   Button,
   Field,
+  DismissKeyboard,
   Notice,
   Pill,
   Row,
@@ -43,7 +45,7 @@ function Content() {
   useEffect(() => {
     void run(load);
     return () => {
-      void Speech.stop();
+      void Speech.stop().catch(() => undefined);
     };
   }, [run, load]);
   const scenario = scenarios.find((s) => s.id === practice?.scenarioId);
@@ -83,7 +85,7 @@ function Content() {
                       quiet
                       title="Hear this response"
                       onPress={() => {
-                        void Speech.stop();
+                        void Speech.stop().catch(() => undefined);
                         Speech.speak(m.text);
                       }}
                     />
@@ -119,6 +121,7 @@ function Content() {
                   multiline
                   maxLength={3000}
                 />
+                <DismissKeyboard />
                 {user?.preferences.ai && entitlement?.active ? (
                   <VoiceInput onText={setText} />
                 ) : null}
@@ -128,6 +131,7 @@ function Content() {
                   busy={action.busy}
                   onPress={() =>
                     action.run(async () => {
+                      Keyboard.dismiss();
                       const p = await api(`/v1/rehearsals/${id}/turn`, 'POST', {
                         text,
                         version: practice.version,
@@ -154,7 +158,10 @@ function Content() {
                   quiet
                   title="Finish and reflect"
                   disabled={practice.messages.length < 3}
-                  onPress={() => setFinish(true)}
+                  onPress={() => {
+                    Keyboard.dismiss();
+                    setFinish(true);
+                  }}
                 />
               </>
             ) : practice.status === 'active' ? (

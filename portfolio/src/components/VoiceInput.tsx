@@ -9,32 +9,56 @@ import {
 } from 'expo-audio';
 import { Button, Notice, Stack, T, useAction } from './ui';
 import { transcribe } from '../lib/api';
+import { createVoiceSession } from '../lib/voice-session';
 export function VoiceInput({ onText }: { onText: (text: string) => void }) {
   const recorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY),
     state = useAudioRecorderState(recorder),
     action = useAction(),
-    timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  async function remove(uri: string | null) {
-    if (!uri) return;
-    if (Platform.OS === 'web') {
-      URL.revokeObjectURL(uri);
-      return;
-    }
-    const { File } = await import('expo-file-system');
-    const f = new File(uri);
-    if (f.exists) f.delete();
-  }
+    { run, setError } = action,
+    timer = useRef<ReturnType<typeof setTimeout> | null>(null),
+    session = useRef<ReturnType<typeof createVoiceSession> | null>(null),
+    onTextRef = useRef(onText);
   useEffect(() => {
+    onTextRef.current = onText;
+  }, [onText]);
+  useEffect(() => {
+    async function remove(uri: string | null) {
+      if (!uri) return;
+      if (Platform.OS === 'web') {
+        URL.revokeObjectURL(uri);
+        return;
+      }
+      const { File } = await import('expo-file-system');
+      const f = new File(uri);
+      if (f.exists) f.delete();
+    }
+    const capture = createVoiceSession({
+      recorder,
+      initialUri: recorder.uri,
+      permission: requestRecordingPermissionsAsync,
+      recordingMode: (enabled) =>
+        setAudioModeAsync({ allowsRecording: enabled, playsInSilentMode: true }),
+      remove,
+      transcribe,
+      onText: (text) => onTextRef.current(text),
+    });
+    session.current = capture;
     const listener = AppState.addEventListener('change', (s) => {
-      if (s !== 'active' && recorder.isRecording)
-        void recorder.stop().then(() => remove(recorder.uri));
+      if (s !== 'active' && capture.isRecording) {
+        if (timer.current) clearTimeout(timer.current);
+        void run(async () => {
+          await capture.finish(false);
+          setError('Recording stopped while the app was inactive. You can keep typing.');
+        });
+      }
     });
     return () => {
       listener.remove();
       if (timer.current) clearTimeout(timer.current);
-      if (recorder.isRecording) void recorder.stop().then(() => remove(recorder.uri));
+      session.current = null;
+      void capture.dispose();
     };
-  }, [recorder]);
+  }, [recorder, run, setError]);
   return (
     <Stack gap={10}>
       <Button
@@ -42,35 +66,16 @@ export function VoiceInput({ onText }: { onText: (text: string) => void }) {
         title={state.isRecording ? 'Stop and use recording' : 'Use my voice · up to 60 seconds'}
         busy={action.busy}
         onPress={() =>
-          action.run(async () => {
-            if (state.isRecording) {
+          run(async () => {
+            const capture = session.current;
+            if (!capture) return;
+            if (capture.isRecording) {
               if (timer.current) clearTimeout(timer.current);
-              await recorder.stop();
-              const uri = recorder.uri;
-              try {
-                if (uri) onText(await transcribe(uri));
-              } finally {
-                await remove(uri);
-                await setAudioModeAsync({ allowsRecording: false });
-              }
-            } else {
-              const p = await requestRecordingPermissionsAsync();
-              if (!p.granted)
-                throw Error('Microphone permission was not granted. You can keep typing.');
-              await setAudioModeAsync({ allowsRecording: true, playsInSilentMode: true });
-              await recorder.prepareToRecordAsync();
-              recorder.record();
+              await capture.finish();
+            } else if (await capture.start()) {
+              if (session.current !== capture) return;
               timer.current = setTimeout(() => {
-                void action.run(async () => {
-                  await recorder.stop();
-                  const uri = recorder.uri;
-                  try {
-                    if (uri) onText(await transcribe(uri));
-                  } finally {
-                    await remove(uri);
-                    await setAudioModeAsync({ allowsRecording: false });
-                  }
-                });
+                void run(() => capture.finish());
               }, 60000);
             }
           })

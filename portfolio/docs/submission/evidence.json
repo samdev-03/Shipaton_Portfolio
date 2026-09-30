@@ -26,6 +26,7 @@
       "native_purchase_verified": false,
       "native_restore_verified": false,
       "native_deletion_verified": false,
+      "native_crash_retest_required": true,
       "onesignal_campaign_id": "",
       "onesignal_delivery_verified": false,
       "layers_dashboard_evidence": "",
