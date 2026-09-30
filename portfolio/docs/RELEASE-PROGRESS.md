@@ -1,5 +1,15 @@
 # Release progress
 
+## Current checkpoint — September 30, 2026, 17:02 UTC
+
+This checkpoint supersedes the historical entries below. Apple review is submitted; the final Devpost entry awaits the native demo and entrant's final submission action.
+
+- The tester explicitly confirmed TestFlight **1.0.0 (4)** passes recording/stop/transcription; microphone denial followed by typing, Hide keyboard and send; Finish and reflect followed by save/reopen; and disposable-account export/deletion. Purchase and Restore Purchases were reported passing on build 2. These are tester-reported sandbox/device results, not production revenue or user-outcome evidence.
+- Apple submission **e0e5effd-7803-40f1-93fc-c3d8defecfe4**, submitted **September 30 at 12:49 p.m. EDT**, includes the app version with build 4, monthly and annual subscriptions, and their subscription group. All four items show **Waiting for Review**. Apple also accepted the authorized expedited-review request. Approval and public store availability are not yet established.
+- Native build 4 uses source `b56c2cd`; live backend `6ef2f60` normalizes native AAC uploads for transcription. [CI](https://github.com/samdev-03/Shipaton_Portfolio/actions/runs/36744492396) passed 31 tests, type checking, lint, browser workflows and iOS/Android exports. The actual IPA contains no tracking declaration, advertising network list, advertising postback endpoint or privacy manifest declaring tracking.
+- The release checker, executed with the production EAS environment and actual build-profile values, reports only two outstanding items: an accessible public demo URL and a verified duration below 120 seconds. Original required native screenshots, icon, public MIT source, eligibility confirmations and RevenueCat configuration are recorded.
+- Next Gen remains the immediate route. The native recording is being prepared by the tester. Other award categories require a qualifying public store release and any category-specific evidence; a pending Apple review does not establish that eligibility.
+
 ## Continuation checkpoint — September 30, 13:52 UTC
 
 This checkpoint supersedes older statuses below. Neither Apple review nor the final Devpost entry has been submitted.

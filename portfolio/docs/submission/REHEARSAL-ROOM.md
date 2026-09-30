@@ -43,7 +43,7 @@ The hardest part was preserving trust across system boundaries.
 
 A stale client should not overwrite a newer rehearsal. A user should not be able to manufacture a premium entitlement. Optional analytics should never contain private conversation text. Notification retries should not produce duplicate reminders. Account deletion must remove content and queue deletion requests for connected providers.
 
-The automated test suite exercises these boundaries alongside the core rehearsal workflow. TestFlight testing exposed two crashes around microphone refusal and leaving a practice. We isolated unsafe recorder access during cleanup, added nine lifecycle regression tests, and shipped safe cleanup and visible keyboard dismissal. A later voice report exposed a recording-format mismatch at the transcription provider; a synthetic AAC test reproduced it, and correcting the upload filename and MIME made the live test pass. Explicit phone retesting is still required.
+The automated test suite exercises these boundaries alongside the core rehearsal workflow. TestFlight testing exposed two crashes around microphone refusal and leaving a practice. We isolated unsafe recorder access during cleanup, added nine lifecycle regression tests, and shipped safe cleanup and visible keyboard dismissal. A later voice report exposed a recording-format mismatch at the transcription provider; a synthetic AAC test reproduced it, and correcting the upload filename and MIME made the live test pass. The tester then confirmed that recording/transcription, microphone-denial fallback, reflection save/reopen and disposable-account export/deletion all pass on build 4.
 
 ## Accomplishments
 
@@ -59,8 +59,10 @@ That hypothesis shaped the product around focused rehearsal, without personality
 
 ## What’s next
 
-As of September 30, the production backend is deployed, the source is public under the MIT license, and iOS 1.0.0 (build 4) is available through TestFlight. All 31 automated tests pass, together with type checking, lint, browser workflows and iOS/Android bundle exports. Fresh live checks passed for account creation, guided practice, saved reflection, subscription-status verification, a real AI response with structured feedback, synthetic-audio transcription, and deletion. Build 4 retains fixes for two reported crash paths and removes unused advertising declarations; the live backend corrects native recording upload formatting. Explicit phone retesting, the native demo and App Store publication are still pending. This entry is being prepared for the Next Gen Award, which evaluates the demo and public source.
+As of September 30, the production backend is deployed, the source is public under the MIT license, and iOS 1.0.0 (build 4) has passed the final tester-reported phone checks. All 31 automated tests pass, together with type checking, lint, browser workflows and iOS/Android bundle exports. Live checks also passed for account creation, guided practice, saved reflection, subscription verification, real AI feedback, synthetic-audio transcription and deletion. The app, monthly and annual subscriptions, and subscription group were submitted to Apple at 12:49 p.m. EDT and are Waiting for Review. The native demo is being recorded. This entry is being prepared for the Next Gen Award, which evaluates the demo and public source without requiring a published store release.
 
 Rehearsal Room is owned by active student entrant Alessandra Ascarza and reflects her ideas and creative direction. A contractor assisted with implementation and release operations. No production revenue, user-study outcome, or sponsor experiment result is claimed.
 
 After launch, the first product experiment will test which starting prompt helps more users complete their first rehearsal while preserving the app’s supportive, privacy-conscious experience.
+
+[Judging guide and implementation map](https://github.com/samdev-03/Shipaton_Portfolio/blob/main/portfolio/docs/submission/NEXT-GEN-JUDGING.md) · [Public MIT source](https://github.com/samdev-03/Shipaton_Portfolio)

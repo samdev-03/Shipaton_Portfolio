@@ -1,6 +1,19 @@
 # Device acceptance and submission checklist
 
-Status: **not yet run on signed devices**. Use this log for the exact candidate you intend to publish. Record failures before claiming completion; passing web workflows is not a substitute.
+Current Rehearsal Room status: **targeted signed-device checks passed according to the tester on September 30, 2026**. TestFlight 1.0.0 (4), previously identified iPhone SE (3rd generation), production API `https://rehearsal-room-api-tooj.onrender.com`.
+
+| Confirmed check | Evidence |
+| --- | --- |
+| Recording, stop and transcription | Tester explicitly reported pass on build 4 |
+| Denied microphone, type, Hide keyboard and send | Tester explicitly reported pass on build 4 |
+| Finish and reflect, save and reopen | Tester explicitly reported pass on build 4 |
+| Export and deletion of disposable account | Tester explicitly reported pass on build 4 |
+| Sandbox purchase and Restore Purchases | Tester explicitly reported pass on build 2; no production revenue implied |
+| Apple submission | Four items submitted September 30 at 12:49 p.m. EDT; Waiting for Review; expedited review accepted |
+
+The broad multi-app checklist below is a template for additional validation. Unfilled rows are not claims of passing checks; they do not override the specifically recorded results above. Other app variants are not submitted. See [the current evidence ledger](evidence.json).
+
+## Additional validation template
 
 Build ID / variant: ______  Device / OS: ______  API origin: ______
 

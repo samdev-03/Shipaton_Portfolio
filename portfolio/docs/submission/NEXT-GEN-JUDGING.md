@@ -8,9 +8,18 @@ Student entrant and owner: **Alessandra Ascarza**. The product reflects her idea
 
 - [Public MIT source](https://github.com/samdev-03/Shipaton_Portfolio) and [license](../../../LICENSE).
 - [Live web companion](https://rehearsal-room-api-tooj.onrender.com), useful for the free guided workflow. This is a companion; the submitted mobile app is iOS.
-- Native release: **1.0.0 (4)** is available through the existing TestFlight group. It includes the recorder-lifecycle and keyboard fixes from build 3 and removes unused advertising declarations. The current backend corrects native voice-upload formatting. Explicit real-device retesting and App Store publication remain pending.
+- Native release: **1.0.0 (4)** passed the tester-reported phone checks for recording/transcription, microphone-denial fallback, keyboard dismissal and send, reflection save/reopen, and disposable-account export/deletion. Build 4 and both subscriptions were submitted to Apple at **12:49 p.m. EDT on September 30** and are **Waiting for Review**. App Store publication remains pending.
 - [Original native home screenshot](native-captures/home-1179x2556.png), [readiness and mode selection](native-captures/scenario-1179x2556.png), and [guided response with retry](native-captures/practice-1179x2556.png): unmodified iPhone 14 Pro simulator PNGs, each 1179 × 2556 without device frames. [Capture provenance and hashes](native-captures/manifest.json).
 - Native demo video is being prepared; this guide will link the final public demo when available.
+
+## Where the Next Gen criteria appear
+
+| Criterion | What to look for |
+| --- | --- |
+| Clear, useful idea | A new manager can rehearse a workload boundary and leave with a concrete next sentence. The focused retry makes changing one response the central action. |
+| Meaningful working progress | The native walkthrough connects readiness, response, feedback, retry and saved reflection. Dated phone and automated test evidence appears below. |
+| Thoughtful RevenueCat use | Two useful scenarios stay free; one entitlement covers both subscription durations. [Purchase/restore UI](../../src/app/pro.tsx), [SDK integration](../../src/lib/sdk.ts), and [server verification/webhooks](../../server/app.mjs) show the complete boundary. |
+| Product and technical care | Optional AI consent, age enforcement, encrypted stored content, export/deletion, stale-update protection, and regression tests address risks created by private rehearsal data and native lifecycle changes. |
 
 ## What to inspect
 
@@ -59,7 +68,7 @@ For a native build, follow [the release setup](../RELEASE.md). Expo Go cannot lo
 - Fresh production checks: account creation, free RevenueCat access verification, guided response, saved reflection, account deletion and invalidated session passed.
 - A dedicated synthetic adult review account with verified Pro received a real AI reply and structured feedback. Synthetic WAV and AAC recordings were successfully transcribed. The AAC test reproduces the phone's MP4 content type; the server now supplies the M4A filename and MIME expected by the provider. Both MP4-labelled and M4A-labelled input returned the expected fictional words after deployment. Original processing preferences were restored and the test session ended afterward.
 - Native simulator sign-in, scenario readiness, guided response and wording feedback were observed on September 30. Original screenshots are linked above. This does not establish successful purchase, restore, microphone access or the complete native workflow.
-- The iPhone tester reported successful purchase, restore and AI conversation in TestFlight build 2. Two crash reports concerned microphone denial and finishing practice. Build 3 avoids native recorder access after disposal and adds keyboard dismissal controls; build 4 retains those fixes. A subsequent build 3 voice feedback report exposed the format error now fixed on the server. Regression checks pass; explicit real-device crash retesting, microphone transcription, export and deletion remain required.
+- The iPhone tester reported successful purchase, restore and AI conversation in TestFlight build 2. Two crash reports concerned microphone denial and finishing practice. Build 3 avoids native recorder access after disposal and adds keyboard dismissal controls; build 4 retains those fixes. A subsequent build 3 voice report exposed the format error now fixed on the server. On September 30, the tester explicitly confirmed all requested build 4 checks pass: recording/stop/transcription; denied microphone followed by typing, keyboard dismissal and sending; Finish and reflect followed by save/reopen; and disposable-account export/deletion. This is tester-reported evidence, not a measured user-outcome study.
 - Inspection of the compiled build 4 IPA confirms no tracking usage declaration, advertising-network entries, advertising postback endpoint, or included privacy manifest declaring tracking. Microphone permission remains present.
 
 The API checks do not establish native purchase success, user outcomes, production revenue or App Store approval. [The evidence ledger](evidence.json) records these separately. No fabricated usage or growth metrics are supplied.

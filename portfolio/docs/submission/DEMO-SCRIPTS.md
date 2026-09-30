@@ -1,6 +1,6 @@
 # Device demonstration scripts
 
-Record each app separately on the platform being submitted. Target 95–110 seconds; leave a few seconds of margin under two minutes. Use fictional names and tasks. Prepare a reviewer account before recording and hide recovery codes, keys and personal notifications. Record actual behavior; label jump cuts and use no unlicensed music. The supplied screenshots and review video, if present, are web previews and cannot prove native behavior.
+Record each app separately on the platform being submitted. Target 95–110 seconds; leave a few seconds of margin under two minutes. Use fictional names and tasks. Prepare a reviewer account before recording and hide recovery codes, keys and personal notifications. Record actual behavior; label jump cuts and use no unlicensed music. The Rehearsal Room screenshots in submission/native-captures are original native simulator captures; unrelated web previews do not prove native behavior.
 
 ## Rehearsal Room · target 105 seconds
 
@@ -14,7 +14,7 @@ Record each app separately on the platform being submitted. Target 95–110 seco
 | 78–93 | Show the actual native paywall and restore control; show consent settings | “Pro adds all six scenarios. RevenueCat powers the monthly and annual options. Optional AI and voice are available only to adults, with their permission.” |
 | 93–105 | Show privacy controls, then home | “Guided practice is available from age 16, with guardian permission under 18. You control processing, export and deletion in Settings. A little practice before the real conversation.” |
 
-Live AI and transcription checks passed on September 30. Demonstrate these features only after they also work on the recording device. OneSignal and Layers are not configured in this native release, so omit notification and experiment claims. Capture a separate silent proof clip of sandbox purchase/restore for review; it is not live revenue evidence.
+The tester confirmed build 4 voice transcription and the requested fallback/reflection/export/deletion checks pass on September 30. Purchase/restore passed on build 2, and live AI checks pass. The core 105-second sequence above is sufficient; include an actual AI/voice moment only if it fits without losing the complete retry loop or native subscription screen. OneSignal and Layers are not configured in this release, so omit notification and experiment claims. Sandbox transactions are not live revenue evidence.
 
 ## Care Relay · target 100 seconds
 

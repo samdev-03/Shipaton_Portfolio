@@ -26,9 +26,9 @@
       "native_purchase_verified": true,
       "native_restore_verified": true,
       "native_purchase_restore_evidence": "Tester reported successful purchase and Restore Purchases in TestFlight build 1.0.0 (2) on September 30, 2026. Sandbox testing; no production revenue claimed.",
-      "native_deletion_verified": false,
-      "native_crash_retest_required": true,
-      "native_crash_retest_notes": "Two TestFlight build 2 reports concerned microphone denial and finishing practice. Build 4 retains build 3 recorder-disposal and keyboard fixes. A subsequent build 3 voice error was traced to upload formatting and fixed on the live backend; synthetic AAC now passes, but explicit phone retesting remains required.",
+      "native_deletion_verified": true,
+      "native_crash_retest_required": false,
+      "native_crash_retest_notes": "September 30 tester confirmation on TestFlight 1.0.0 (4): all requested checks pass, including recording-stop-transcription; denied microphone-type-Hide keyboard-send; Finish and reflect-save-reopen; and export/deletion of a disposable account. Tester-reported on the previously identified iPhone SE (3rd generation).",
       "replacement_ios_build": "https://expo.dev/accounts/samdev03/projects/shipaton-rehearsal/builds/e2a4104a-5362-4710-81a8-a8daaabd35a4",
       "replacement_build_ci": "https://github.com/samdev-03/Shipaton_Portfolio/actions/runs/36744492396",
       "onesignal_campaign_id": "",
@@ -50,10 +50,13 @@
       "native_guided_response_verified": true,
       "native_ai_response_verified": true,
       "native_ai_response_evidence": "Tester reported a working AI conversation in TestFlight build 2; finishing the conversation crashed and is tracked separately.",
-      "native_microphone_verified": false,
-      "current_testflight_build": "1.0.0 (4), assigned to the existing internal QA group September 30",
+      "native_microphone_verified": true,
+      "current_testflight_build": "1.0.0 (4), final requested phone checks passed according to the tester September 30",
       "live_transcription_evidence": "After backend commit 6ef2f60 deployed, the same synthetic AAC recording sent as audio/mp4 and audio/m4a both returned HTTP 200 and expected fictional words at 2026-09-30T16:33:39Z. Original processing preferences restored and test session ended. This does not verify the physical microphone.",
-      "apple_review_status": "Draft: app build 4, two subscriptions and their group are ready together. Not submitted; awaiting explicit phone retest."
+      "apple_review_status": "Submitted September 30 at 12:49 p.m. EDT. Four items Waiting for Review: app version 1.0 with build 4, two subscriptions and their group. Submission e0e5effd-7803-40f1-93fc-c3d8defecfe4.",
+      "native_export_verified": true,
+      "native_reflection_reopen_verified": true,
+      "native_verification_source": "Direct tester confirmation in the September 30 release conversation; no measured user-study outcomes or production revenue are implied."
     },
     "care": {
       "targets": [
