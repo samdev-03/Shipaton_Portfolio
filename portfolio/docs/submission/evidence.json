@@ -67,7 +67,10 @@
       "secondary_demo_evidence": "Public YouTube publication and advancing 1:30 playback with the supplied English captions verified September 30. Creator attribution and contracted technical assistance disclosed.",
       "android_status": "Google Play app record created with authorization. Console requires 12 closed-test participants for 14 continuous days; zero opted in. No production access, build upload, Android purchase verification or public release claimed.",
       "google_play_app_id": "4975979931646231460",
-      "devpost_polish": "Public intro links the native demo and judging guide; live free web companion added to Try it out; creator contribution clarified. Public render verified and submitted status retained."
+      "devpost_polish": "Public intro links the native demo and judging guide; live free web companion added to Try it out; creator contribution clarified. Public render verified and submitted status retained.",
+      "web_source_checkpoint": "31dd554aa0aa63e1881a18ee1d083b50b8ae4dfe",
+      "web_source_verification": "https://github.com/samdev-03/Shipaton_Portfolio/actions/runs/36764258748",
+      "web_safety_reporting_evidence": "33 automated tests, six browser workflows, typecheck, lint, iOS/Android exports passed. Render deployed 19:15:52 UTC September 30. Live real-AI and synthetic report storage/export/deletion checks passed 19:16 UTC. Reporting is in the current web/source version, not the already-submitted iOS build 4."
     },
     "care": {
       "targets": [
