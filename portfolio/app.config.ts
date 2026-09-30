@@ -39,14 +39,14 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         foregroundImage: `./assets/brands/${id}/adaptive.png`,
         backgroundColor: b.color,
       },
-      blockedPermissions: id === 'rehearsal' ? [] : ['android.permission.RECORD_AUDIO'],
+      blockedPermissions: [
+        'com.google.android.gms.permission.AD_ID',
+        ...(id === 'rehearsal' ? [] : ['android.permission.RECORD_AUDIO']),
+      ],
     },
     web: { bundler: 'metro', output: 'single', favicon: `./assets/brands/${id}/icon.png` },
     plugins: [
-      [
-        'onesignal-expo-plugin',
-        { mode: production ? 'production' : 'development' },
-      ],
+      ['onesignal-expo-plugin', { mode: production ? 'production' : 'development' }],
       'expo-router',
       'expo-secure-store',
       [
@@ -57,7 +57,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           recordAudioAndroid: id === 'rehearsal',
         },
       ],
-      '@layers/expo',
+      // Layers' config plugin adds advertising declarations by default. Analytics
+      // use the consent-gated SDK directly; these apps do not use ad tracking.
+      ['expo-tracking-transparency', { userTrackingPermission: false }],
       'expo-font',
       'expo-asset',
       'expo-sharing',
