@@ -2,6 +2,8 @@ name: Verify portfolio
 on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
+env:
+  ONESIGNAL_DISABLE_LOCATION: 'true'
 defaults:
   run:
     working-directory: portfolio

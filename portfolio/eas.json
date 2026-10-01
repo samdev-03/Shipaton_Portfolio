@@ -11,7 +11,8 @@
         "buildType": "apk"
       },
       "env": {
-        "APP_VARIANT": "rehearsal"
+        "APP_VARIANT": "rehearsal",
+        "ONESIGNAL_DISABLE_LOCATION": "true"
       },
       "node": "24.19.0"
     },
@@ -21,6 +22,7 @@
       "env": {
         "APP_VARIANT": "rehearsal",
         "APP_ENV": "production",
+        "ONESIGNAL_DISABLE_LOCATION": "true",
         "BUNDLE_ROOT": "com.horizonsystemssolutions",
         "PORTFOLIO_PREVIEW": "0",
         "REHEARSAL_EAS_PROJECT_ID": "28dff74a-4109-4e3b-b008-f6786819b1d4",
@@ -42,6 +44,7 @@
       "autoIncrement": true,
       "env": {
         "APP_VARIANT": "care",
+        "ONESIGNAL_DISABLE_LOCATION": "true",
         "NODE_ENV": "production"
       },
       "node": "24.19.0"
@@ -50,6 +53,7 @@
       "autoIncrement": true,
       "env": {
         "APP_VARIANT": "meal",
+        "ONESIGNAL_DISABLE_LOCATION": "true",
         "NODE_ENV": "production"
       },
       "node": "24.19.0"
@@ -58,6 +62,7 @@
       "autoIncrement": true,
       "env": {
         "APP_VARIANT": "quote",
+        "ONESIGNAL_DISABLE_LOCATION": "true",
         "NODE_ENV": "production"
       },
       "node": "24.19.0"
