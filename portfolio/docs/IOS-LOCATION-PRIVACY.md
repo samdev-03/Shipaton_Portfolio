@@ -16,5 +16,6 @@ Uploading a build does not automatically replace an active App Review submission
 
 References:
 
+- https://github.com/OneSignal/onesignal-expo-plugin#plugin-prop
 - https://github.com/OneSignal/react-native-onesignal#disable-location-module
 - https://developer.apple.com/documentation/uikit/requesting-access-to-protected-resources

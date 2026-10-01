@@ -1,5 +1,15 @@
 # Release progress
 
+## Location privacy correction — October 1, 2026
+
+Apple delivered a non-blocking ITMS-90683 warning for build 4. Inspection found location-access APIs only in the unused `OneSignalLocation.framework`. The supported OneSignal Expo `disableLocation: true` option now excludes that module from both the app and notification extension; EAS and CI also set `ONESIGNAL_DISABLE_LOCATION=true`.
+
+- Source `bf47df7996ffdfadc52fccdb37b1c31387352bec` passed [all verification](https://github.com/samdev-03/Shipaton_Portfolio/actions/runs/36916137636): 33 automated tests, six browser workflows, lint, typecheck and iOS/Android exports.
+- Signed iOS build **1.0.0 (6)** completed in [EAS](https://expo.dev/accounts/samdev03/projects/shipaton-rehearsal/builds/67e69e17-c73a-4d6c-a557-732936ee0c88). All 19 native binaries were scanned: no location framework or location-access selectors remain. Microphone permission is preserved; advertising/tracking declarations remain absent. IPA SHA256: `d621f2f6df2a5024da0ecfcdf4b357571a63636dc45346f3525676cee88a4c10`.
+- [Apple upload](https://expo.dev/accounts/samdev03/projects/shipaton-rehearsal/submissions/f7fb23b1-ff47-4197-968a-5cd89018eb05) finished at 19:53:55 UTC. Apple processed build `4c525ec6-1052-4c94-9bdb-17fc339078dc`; TestFlight shows Ready to Submit, the existing Rehearsal Release QA group and two testers. Testing notes were saved directly in Apple.
+- Existing App Review submission `e0e5effd-7803-40f1-93fc-c3d8defecfe4` remains on build 4, Waiting for Review when checked October 1. It was not cancelled for an accepted-delivery warning. Build 6 is available for the next delivery; upload success is not App Store approval. Native device results for build 6 are not yet claimed.
+- Build 5 failed internally because the environment flag alone left the extension on different dependencies. The Expo plugin option fixed that conflict. Build 5 was never delivered to Apple. Build 6 also includes the previously tested AI reporting work already in source/web; the privacy fix itself changes native packaging only.
+
 ## Current checkpoint — September 30, 2026, 19:15 UTC
 
 This checkpoint supersedes the historical entries below. The entrant completed the Devpost submission; the finalization page showed SUBMITTED and 5/5. The native demo, original screenshots and licensed public source are present. Apple remains Waiting for Review, with automatic release and the accepted expedited request already configured.
