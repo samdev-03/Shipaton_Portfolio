@@ -4,7 +4,9 @@ Rehearsal Room and the other portfolio apps do not use device location. Do not a
 
 Apple's ITMS-90683 warning for Rehearsal Room build 4 was traced to the bundled `OneSignalLocation.framework`. The installed `react-native-onesignal` 5.5.14 dependency includes that optional module by default. Its supported `ONESIGNAL_DISABLE_LOCATION=true` build flag excludes the module while retaining notifications and in-app messages.
 
-Every EAS build profile now sets this flag, either directly or through inheritance. CI sets it too. The simulator profile inherits the production Rehearsal Room environment. Generate native projects from Expo configuration as usual; do not edit generated native files or installed SDK code.
+The OneSignal Expo plugin sets `disableLocation: true` in `app.config.ts`. This is essential: it configures both the app and notification extension with the same location-free dependencies. Setting only the environment flag leaves the extension on the full SDK and causes duplicate-framework build errors.
+
+Every EAS build profile also sets the environment flag, either directly or through inheritance. CI sets it too. The simulator profile inherits the production Rehearsal Room environment. Generate native projects from Expo configuration as usual; do not edit generated native files or installed SDK code.
 
 For local CocoaPods or Gradle builds, export the same environment variable before resolving dependencies or launching the IDE. An existing CocoaPods lockfile may retain the location module, so regenerate the generated native project or reinstall its pods without the old location dependency. EAS replacement builds must use `--clear-cache`.
 

@@ -46,7 +46,10 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     web: { bundler: 'metro', output: 'single', favicon: `./assets/brands/${id}/icon.png` },
     plugins: [
-      ['onesignal-expo-plugin', { mode: production ? 'production' : 'development' }],
+      [
+        'onesignal-expo-plugin',
+        { mode: production ? 'production' : 'development', disableLocation: true },
+      ],
       'expo-router',
       'expo-secure-store',
       [
